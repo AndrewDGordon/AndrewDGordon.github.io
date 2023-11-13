@@ -1,3 +1,3 @@
 # Andrew D. Gordon
 
-My formal CV is [here](cv.pdf). Really.
+My formal CV is [here](cv.pdf).
