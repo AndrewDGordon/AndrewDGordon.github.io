@@ -6,6 +6,13 @@ As Partner Research Manager at Microsoft Research, Andy led a diverse team of re
 Impact includes natural language formulas using generative AI in Copilot for Excel, the [Calc.ts client-side execution engine for Excel formulas](https://www.linkedin.com/feed/update/urn:li:activity:6688489472960544768/), Excel Labs, and formula features like [LET/LAMBDA](https://www.linkedin.com/feed/update/urn:li:activity:6759611720181907456/).
 Andy was recognised as a 2020 Fellow of the Association for Computing Machinery (ACM) for his research on programming languages: principles, logic, usability, and trustworthiness.
 As an academic, Andy is now Honorary Professor at the University of Edinburgh, following 12 years as full Professor.
-His PhD research at Cambridge led to the design of monadic I/O in Haskell, with his ASCII art ">>=" inspiring the Haskell logo.
+His PhD research at Cambridge contributed to the design of monadic I/O in Haskell, with his ASCII art ">>=" inspiring the Haskell logo.
 
-My formal CV is [here](cv.pdf).
+* My [formal CV](cv.pdf)
+* [LinkedIn](https://www.linkedin.com/in/andrew-d-gordon/)
+* [Google Scholar](https://scholar.google.com/citations?user=mfBjUiIAAAAJ)
+* [DBLP](https://dblp.org/pid/g/AndrewDGordon.html)
+* [ORCID 0000-0002-5809-2484](https://orcid.org/0000-0002-5809-2484)
+* [Wikidata Q4756743](https://www.wikidata.org/wiki/Q4756743)
+* [arXiv](https://arxiv.org/a/gordon_a_1.html)
+* [X](https://x.com/AndrewDGordon)
