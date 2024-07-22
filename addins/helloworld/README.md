@@ -1,5 +1,7 @@
 # Create an Excel add-in that displays hello world
 
+Based on [this sample](https://github.com/OfficeDev/Office-Add-in-samples/tree/main/Samples/hello-world/excel-hello-world).
+
 ## Summary
 
 Learn how to build the simplest Office Add-in with only a manifest, HTML web page, and a logo. This sample will help you understand the fundamental parts of an Office Add-in.
