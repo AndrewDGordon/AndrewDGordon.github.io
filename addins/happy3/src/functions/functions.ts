@@ -555,7 +555,7 @@ async function who_funds_with_who(grants_column: string[][]) {
     // calculate all permutations in funder pairs
     for (let i = 0; i < arr.length; i++) {
       for (let j = 0; j < arr.length; j++) {
-        if (i !== j && arr[i] < arr[j]) {
+        if (i !== j) {
           result.push([mk_ExcelString(arr[i]), mk_ExcelString(arr[j])]);
         }
       }
