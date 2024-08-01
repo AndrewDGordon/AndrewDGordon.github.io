@@ -1,0 +1,2 @@
+!function(){"use strict";CustomFunctions.associate("ADD",(function(t,n){return t+n})),CustomFunctions.associate("CLOCK",(function(t){const n=setInterval((()=>{const n=(new Date).toLocaleTimeString();t.setResult(n)}),1e3);t.onCanceled=()=>{clearInterval(n)}})),CustomFunctions.associate("INCREMENT",(function(t,n){let e=0;const s=setInterval((()=>{e+=t,n.setResult(e)}),1e3);n.onCanceled=()=>{clearInterval(s)}})),CustomFunctions.associate("LOG",(function(t){return console.log(t),t}))}();
+//# sourceMappingURL=functions.js.map
