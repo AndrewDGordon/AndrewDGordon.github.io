@@ -26,7 +26,7 @@
     </Sets>
   </Requirements>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://AndrewDGordon.github.io/addins/happy3/dist/assets/taskpane.html"/>
+    <SourceLocation DefaultValue="https://AndrewDGordon.github.io/addins/happy3/dist/taskpane.html"/>
   </DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
