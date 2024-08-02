@@ -14,4 +14,4 @@ To install add-in via a network share:
 To remove previous versions:
 * [Clear the Office cache](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/clear-cache)
 
-To remove an add-in sideloaded to Office on the web, [clear the brower's cache](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing#remove-a-sideloaded-add-in). You can [click this link](edge://settings/clearBrowserData) to get to cache in Edge.
+To remove an add-in sideloaded to Office on the web, [clear the browser's cache](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing#remove-a-sideloaded-add-in). You can [click this link](edge://settings/clearBrowserData) to get to cache in Edge.
