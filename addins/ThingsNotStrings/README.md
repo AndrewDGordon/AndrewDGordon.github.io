@@ -10,12 +10,12 @@ Motivating examples include:
 
 You need to follow the steps below. The page [Sideload Office Add-ins for testing from a network share](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins) explains the steps in detail.
 
-* Create a folder called Manifest (eg, directly in your C drive).
-* Download the file [manifest-things-not-strings.xml](manifest-things-not-strings.xml) and place it in the Manifest folder.
-* Share the folder Manifest using the Sharing tab on its Properties menu.
-* Make note of the network path (eg, "C:\\ADG-LAPTOP\Manifest").
-* Specify the shared folder as a trusted catalog.
-* Sideload the addin into Excel, using the Add-ins item in the ribbon.
+1. Create a folder called Manifest (eg, directly in your C drive).
+1. Download the XML file [manifest-things-not-strings.xml](manifest-things-not-strings.xml) (click "download raw file") and place it in the Manifest folder.
+1. Share the folder Manifest using the Sharing tab on its Properties menu.
+1. Make note of the network path (eg, "\\\\ADG-LAPTOP\\Manifest").
+1. Specify the network path of the shared folder as a Trusted Catalog using the "Trust Center Settings" in the "Trust Center" in Excel's Options.  Be sure to tick "Show in Menu".
+1. Sideload the addin into Excel, using the Add-ins item in the ribbon.
 
 ## How to build me
 
