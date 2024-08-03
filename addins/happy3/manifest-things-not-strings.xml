@@ -7,7 +7,7 @@
   xsi:type="TaskPaneApp">
   <Id>b30e8bac-9366-4344-85c8-523782d3bcfd</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>Contoso</ProviderName>
+  <ProviderName>Andy Gordon</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Things Not Strings"/>
   <Description DefaultValue="Entities as values in Excel."/>
