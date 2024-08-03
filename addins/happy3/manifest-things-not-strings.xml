@@ -9,8 +9,8 @@
   <Version>1.0.0.0</Version>
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="happy3"/>
-  <Description DefaultValue="Write your own Excel functions in TypeScript."/>
+  <DisplayName DefaultValue="Things Not Strings"/>
+  <Description DefaultValue="Entities as values in Excel."/>
   <IconUrl DefaultValue="https://AndrewDGordon.github.io/addins/happy3/dist/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://AndrewDGordon.github.io/addins/happy3/dist/assets/icon-64.png"/>
   <SupportUrl DefaultValue="https://AndrewDGordon.github.io"/>
@@ -97,7 +97,7 @@
         <bt:Url id="Functions.Script.Url" DefaultValue="https://andrewdgordon.github.io/addins/happy3/dist/functions.js"/>
         <bt:Url id="Functions.Metadata.Url" DefaultValue="https://andrewdgordon.github.io/addins/happy3/dist/functions.json"/>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="/taskpane.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://andrewdgordon.github.io/addins/happy3/dist/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="Functions.Namespace" DefaultValue="CONTOSO"/>
