@@ -101,13 +101,13 @@
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="Functions.Namespace" DefaultValue="THINGSNOTSTRINGS"/>
-        <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
-        <bt:String id="CommandsGroup.Label" DefaultValue="Commands Group"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Taskpane Friday"/>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with Things Not Strings!"/>
+        <bt:String id="CommandsGroup.Label" DefaultValue="Things Not Strings"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Things Not Strings"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started."/>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane"/>
+        <bt:String id="GetStarted.Description" DefaultValue="Your Things Not Strings add-in loaded succesfully."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Things Not Strings"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
