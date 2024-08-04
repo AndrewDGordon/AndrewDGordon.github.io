@@ -1,5 +1,9 @@
 ﻿/* global clearInterval, console, CustomFunctions, setInterval */
 
+import { MyType, y } from "./types";
+
+const x: MyType = "foo" + y;
+
 /**
  * Adds two numbers.
  * @customfunction
@@ -8,7 +12,7 @@
  * @returns The sum of the two numbers.
  */
 export function add(first: number, second: number): number {
-  return first + second;
+  return first + second + x.length;
 }
 
 /**
@@ -65,7 +69,6 @@ export function logMessage(message: string): string {
   return message;
 }
 
-
 // json-excel.ts
 // Load this code file using ScriptLab to make JSON functionality available as custom functions in Excel
 // Documentation: https://docs.microsoft.com/en-us/office/dev/add-ins/excel/excel-data-types-overview
@@ -75,74 +78,87 @@ export function logMessage(message: string): string {
 
 // example of a layout card
 const card: Card = {
-  title: { 
-      property: "Product Name" 
+  title: {
+    property: "Product Name",
   },
-  mainImage: { 
-      property: "Image" 
+  mainImage: {
+    property: "Image",
   },
   sections: [
-      {
-          layout: "List",
-          properties: ["Product ID"]
-      },
-      {
-          layout: "List",
-          title: "Quantity and price",
-          collapsible: true,
-          collapsed: false, // This section will not be collapsed when the card is opened.
-          properties: ["Quantity Per Unit", "Unit Price"]
-      },
-      {
-          layout: "List",
-          title: "Additional information",
-          collapsible: true,
-          collapsed: true, // This section will be collapsed when the card is opened.
-          properties: ["Discontinued"]
-      }
-  ]
+    {
+      layout: "List",
+      properties: ["Product ID"],
+    },
+    {
+      layout: "List",
+      title: "Quantity and price",
+      collapsible: true,
+      collapsed: false, // This section will not be collapsed when the card is opened.
+      properties: ["Quantity Per Unit", "Unit Price"],
+    },
+    {
+      layout: "List",
+      title: "Additional information",
+      collapsible: true,
+      collapsed: true, // This section will be collapsed when the card is opened.
+      properties: ["Discontinued"],
+    },
+  ],
 };
 
-type Card =
- { title: { property: string },
-    mainImage?: { property: string },
-    sections: Array<{
-      layout: "List",
-      title?: string,
-      collapsible?: boolean,
-      collapsed?: boolean,
-      properties: Array<string>
-    }>
-  };
+type Card = {
+  title: { property: string };
+  mainImage?: { property: string };
+  sections: Array<{
+    layout: "List";
+    title?: string;
+    collapsible?: boolean;
+    collapsed?: boolean;
+    properties: Array<string>;
+  }>;
+};
 
-type ExcelEntity =
-  {
-    type: "Entity",
-    text: string,
-    properties: { [key: string]: ExcelValue },
-    provider?: { description: string, logoSourceAddress: string, logoTargetAddress: string }
-    layouts?: {
-      compact?: {
-          icon: string // eg "Gift" see icon list here: https://learn.microsoft.com/en-us/javascript/api/excel/excel.entitycompactlayouticons
-      },
-      card? : Card
-    }
+type ExcelEntity = {
+  type: "Entity";
+  text: string;
+  properties: { [key: string]: ExcelValue };
+  provider?: { description: string; logoSourceAddress: string; logoTargetAddress: string };
+  layouts?: {
+    compact?: {
+      icon: string; // eg "Gift" see icon list here: https://learn.microsoft.com/en-us/javascript/api/excel/excel.entitycompactlayouticons
+    };
+    card?: Card;
   };
+};
 
-type ExcelArray = { type: "Array", elements: Array<Array<ExcelValue>> };  // elements cannot be the empty array
-type ExcelString = { type: "String", basicValue: string };
-type ExcelDouble = { type: "Double", basicValue: number };
-type ExcelBoolean = { type: "Boolean", basicValue: boolean };
-type ExcelError = { type: "Error", basicType: "Error", basicValue: string };
-type ExcelFormattedNumber = { type: "FormattedNumber", basicValue: number, numberFormat: string, propertyMetadata?: { sublabel: string } };
+type ExcelArray = { type: "Array"; elements: Array<Array<ExcelValue>> }; // elements cannot be the empty array
+type ExcelString = { type: "String"; basicValue: string };
+type ExcelDouble = { type: "Double"; basicValue: number };
+type ExcelBoolean = { type: "Boolean"; basicValue: boolean };
+type ExcelError = { type: "Error"; basicType: "Error"; basicValue: string };
+type ExcelFormattedNumber = {
+  type: "FormattedNumber";
+  basicValue: number;
+  numberFormat: string;
+  propertyMetadata?: { sublabel: string };
+};
 
 // How different types of Excel values to be returned to Excel
-type ExcelValue = number | string | ExcelEntity | ExcelArray | ExcelString | ExcelDouble | ExcelBoolean | ExcelError | ExcelFormattedNumber
+type ExcelValue =
+  | number
+  | string
+  | ExcelEntity
+  | ExcelArray
+  | ExcelString
+  | ExcelDouble
+  | ExcelBoolean
+  | ExcelError
+  | ExcelFormattedNumber;
 
 const nullErrorValue: ExcelError = {
   type: "Error",
   basicType: "Error",
-  basicValue: "#NULL!"
+  basicValue: "#NULL!",
 };
 
 function mk_ExcelString(value: string): ExcelString {
@@ -161,115 +177,111 @@ function mk_ExcelArray(elements: Array<Array<ExcelValue>>): ExcelValue {
 }
 
 const romsey = {
-  "id": "GB-CHC-1069905",
-  "name": "ROMSEY MILL TRUST",
-  "charityNumber": "1069905",
-  "companyNumber": "03556721",
-  "description": "Romsey Mill's activities, enabling vulnerable and disadvantaged young people children and families to thrive, include intensive 1-to-1 support, early-years care & education, Children's Centre services, parenting courses, work in schools, detached youth work, interest-based group work (e.g. sport,arts,music), training and alternative education, IAG sessions, trips & outdoor residential experiences.",
-  "url": "http://www.romseymill.org",
-  "latestFinancialYearEnd": "2023-03-31",
-  "latestIncome": 1544824,
-  "latestSpending": 1485573,
-  "latestEmployees": 37,
-  "latestVolunteers": 164,
-  "trusteeCount": 8,
-  "dateRegistered": "1998-06-04",
-  "dateRemoved": null,
-  "active": true,
-  "parent": null,
-  "organisationType": [
-      "Registered Company",
-      "Registered Charity",
-      "Incorporated Charity",
-      "Registered Charity (England and Wales)"
+  id: "GB-CHC-1069905",
+  name: "ROMSEY MILL TRUST",
+  charityNumber: "1069905",
+  companyNumber: "03556721",
+  description:
+    "Romsey Mill's activities, enabling vulnerable and disadvantaged young people children and families to thrive, include intensive 1-to-1 support, early-years care & education, Children's Centre services, parenting courses, work in schools, detached youth work, interest-based group work (e.g. sport,arts,music), training and alternative education, IAG sessions, trips & outdoor residential experiences.",
+  url: "http://www.romseymill.org",
+  latestFinancialYearEnd: "2023-03-31",
+  latestIncome: 1544824,
+  latestSpending: 1485573,
+  latestEmployees: 37,
+  latestVolunteers: 164,
+  trusteeCount: 8,
+  dateRegistered: "1998-06-04",
+  dateRemoved: null,
+  active: true,
+  parent: null,
+  organisationType: [
+    "Registered Company",
+    "Registered Charity",
+    "Incorporated Charity",
+    "Registered Charity (England and Wales)",
   ],
-  "organisationTypePrimary": "Registered Charity",
-  "alternateName": [
-      "THE MILL",
-      "TRANSITIONS PROGRAMME",
-      "YOUNG PARENT PROGRAMME",
-      "SOCIAL INCLUSION PROGRAMME",
-      "UNDER FIVES PROGRAMME",
-      "ROMSEY MILL",
-      "ASPIRE"
+  organisationTypePrimary: "Registered Charity",
+  alternateName: [
+    "THE MILL",
+    "TRANSITIONS PROGRAMME",
+    "YOUNG PARENT PROGRAMME",
+    "SOCIAL INCLUSION PROGRAMME",
+    "UNDER FIVES PROGRAMME",
+    "ROMSEY MILL",
+    "ASPIRE",
   ],
-  "telephone": "01223213162",
-  "email": "admin@romseymill.org",
-  "location": [
-      {
-          "id": "CB1 3BZ",
-          "name": "CB1 3BZ",
-          "geoCode": "E07000008",
-          "type": "HQ"
-      },
-      {
-          "id": "E10000003",
-          "name": "Cambridgeshire",
-          "geoCode": "E10000003",
-          "type": "AOO"
-      }
+  telephone: "01223213162",
+  email: "admin@romseymill.org",
+  location: [
+    {
+      id: "CB1 3BZ",
+      name: "CB1 3BZ",
+      geoCode: "E07000008",
+      type: "HQ",
+    },
+    {
+      id: "E10000003",
+      name: "Cambridgeshire",
+      geoCode: "E10000003",
+      type: "AOO",
+    },
   ],
-  "address": {
-      "streetAddress": "ROMSEY MILL, HEMINGFORD ROAD",
-      "addressLocality": "CAMBRIDGE",
-      "postalCode": "CB1 3BZ"
+  address: {
+    streetAddress: "ROMSEY MILL, HEMINGFORD ROAD",
+    addressLocality: "CAMBRIDGE",
+    postalCode: "CB1 3BZ",
   },
-  "sources": [
-      "ccew"
+  sources: ["ccew"],
+  links: [
+    {
+      site: "Find that Charity",
+      url: "https://findthatcharity.uk/orgid/GB-CHC-1069905.json",
+      orgid: "GB-CHC-1069905",
+    },
+    {
+      site: "romseymill.org",
+      url: "http://www.romseymill.org",
+      orgid: "GB-CHC-1069905",
+    },
+    {
+      site: "Charity Commission England and Wales",
+      url: "https://register-of-charities.charitycommission.gov.uk/charity-details/?regId=1069905&subId=0",
+      orgid: "GB-CHC-1069905",
+    },
+    {
+      site: "CharityBase",
+      url: "https://search.charitybase.uk/chc/1069905",
+      orgid: "GB-CHC-1069905",
+    },
+    {
+      site: "Giving is Great",
+      url: "https://givingisgreat.org/charitydetail/?regNo=1069905",
+      orgid: "GB-CHC-1069905",
+    },
+    {
+      site: "Companies House",
+      url: "https://find-and-update.company-information.service.gov.uk/company/03556721",
+      orgid: "GB-COH-03556721",
+    },
+    {
+      site: "Opencorporates",
+      url: "https://opencorporates.com/companies/gb/03556721",
+      orgid: "GB-COH-03556721",
+    },
   ],
-  "links": [
-      {
-          "site": "Find that Charity",
-          "url": "https://findthatcharity.uk/orgid/GB-CHC-1069905.json",
-          "orgid": "GB-CHC-1069905"
-      },
-      {
-          "site": "romseymill.org",
-          "url": "http://www.romseymill.org",
-          "orgid": "GB-CHC-1069905"
-      },
-      {
-          "site": "Charity Commission England and Wales",
-          "url": "https://register-of-charities.charitycommission.gov.uk/charity-details/?regId=1069905&subId=0",
-          "orgid": "GB-CHC-1069905"
-      },
-      {
-          "site": "CharityBase",
-          "url": "https://search.charitybase.uk/chc/1069905",
-          "orgid": "GB-CHC-1069905"
-      },
-      {
-          "site": "Giving is Great",
-          "url": "https://givingisgreat.org/charitydetail/?regNo=1069905",
-          "orgid": "GB-CHC-1069905"
-      },
-      {
-          "site": "Companies House",
-          "url": "https://find-and-update.company-information.service.gov.uk/company/03556721",
-          "orgid": "GB-COH-03556721"
-      },
-      {
-          "site": "Opencorporates",
-          "url": "https://opencorporates.com/companies/gb/03556721",
-          "orgid": "GB-COH-03556721"
-      }
+  orgIDs: ["GB-COH-03556721", "GB-CHC-1069905"],
+  linked_records: [
+    {
+      orgid: "GB-CHC-1069905",
+      url: "https://findthatcharity.uk/orgid/GB-CHC-1069905.json",
+    },
+    {
+      orgid: "GB-COH-03556721",
+      url: "https://findthatcharity.uk/orgid/GB-COH-03556721.json",
+    },
   ],
-  "orgIDs": [
-      "GB-COH-03556721",
-      "GB-CHC-1069905"
-  ],
-  "linked_records": [
-      {
-          "orgid": "GB-CHC-1069905",
-          "url": "https://findthatcharity.uk/orgid/GB-CHC-1069905.json"
-      },
-      {
-          "orgid": "GB-COH-03556721",
-          "url": "https://findthatcharity.uk/orgid/GB-COH-03556721.json"
-      }
-  ],
-  "dateModified": "2024-07-27T01:08:56.178Z"
-}
+  dateModified: "2024-07-27T01:08:56.178Z",
+};
 
 type Charity = {
   id: string;
@@ -320,8 +332,8 @@ type Charity = {
 
 type Grant = {
   grant_id: string;
-  data: GrantData
-}
+  data: GrantData;
+};
 type GrantData = {
   id: string;
   title: string;
@@ -355,51 +367,52 @@ type GrantData = {
   }>;
 };
 
-const grant: Grant =
-{
-  "grant_id": "360G-CiN-2016-6291",
-  "data": {
-      "id": "360G-CiN-2016-6291",
-      "title": "Grant to Mencap Cymru",
-      "currency": "GBP",
-      "awardDate": "2017-02-09T00:00:00+00:00",
-      "dataSource": "https://www.bbcchildreninneed.co.uk/grants/bbc-children-in-need-360-giving/",
-      "description": "This project will provide disabled young people with opportunities to sustain friendships independently of their parents.  They will have increased confidence, be more independent, and have better friendships.",
-      "dateModified": "2021-05-25T00:00:00+00:00",
-      "plannedDates": [
+const grant: Grant = {
+  grant_id: "360G-CiN-2016-6291",
+  data: {
+    id: "360G-CiN-2016-6291",
+    title: "Grant to Mencap Cymru",
+    currency: "GBP",
+    awardDate: "2017-02-09T00:00:00+00:00",
+    dataSource: "https://www.bbcchildreninneed.co.uk/grants/bbc-children-in-need-360-giving/",
+    description:
+      "This project will provide disabled young people with opportunities to sustain friendships independently of their parents.  They will have increased confidence, be more independent, and have better friendships.",
+    dateModified: "2021-05-25T00:00:00+00:00",
+    plannedDates: [
+      {
+        endDate: "2020-09-01T00:00:00+00:00",
+        duration: 36,
+        startDate: "2017-09-01T00:00:00+00:00",
+      },
+    ],
+    amountAwarded: 75406,
+    grantProgramme: [
+      {
+        title: "Main Grants",
+      },
+    ],
+    fundingOrganization: [
+      {
+        id: "GB-CHC-802052",
+        name: "BBC Children in Need",
+      },
+    ],
+    recipientOrganization: [
+      {
+        id: "GB-CHC-222377",
+        name: "Mencap Cymru",
+        location: [
           {
-              "endDate": "2020-09-01T00:00:00+00:00",
-              "duration": 36,
-              "startDate": "2017-09-01T00:00:00+00:00"
-          }
-      ],
-      "amountAwarded": 75406,
-      "grantProgramme": [
-          {
-              "title": "Main Grants"
-          }
-      ],
-      "fundingOrganization": [
-          {
-              "id": "GB-CHC-802052",
-              "name": "BBC Children in Need"
-          }
-      ],
-      "recipientOrganization": [
-          {
-              "id": "GB-CHC-222377",
-              "name": "Mencap Cymru",
-              "location": [
-                  {
-                      "name": "Llanishen",
-                      "geoCode": "W05001012",
-                      "geoCodeType": "Ward"
-                  }
-              ],
-              "charityNumber": "222377"
-          }
-      ]
-  }};
+            name: "Llanishen",
+            geoCode: "W05001012",
+            geoCodeType: "Ward",
+          },
+        ],
+        charityNumber: "222377",
+      },
+    ],
+  },
+};
 
 interface PageData {
   count: number;
@@ -408,11 +421,11 @@ interface PageData {
 }
 
 // Fetches a paginated list of results from a URL.  May throw exception.
-type Results = Array<{ [key: string]: any }>
+type Results = Array<{ [key: string]: any }>;
 const cache: { [url: string]: Results } = {};
 async function fetchPaginatedList(url: string): Promise<Results | Error> {
   const options = {
-    method: "GET"
+    method: "GET",
   };
 
   if (cache[url]) {
@@ -422,7 +435,7 @@ async function fetchPaginatedList(url: string): Promise<Results | Error> {
 
   const results: Results = [];
   let page = 0;
-  let cursor: string | null = url
+  let cursor: string | null = url;
   while (cursor !== null) {
     const start = Date.now();
 
@@ -442,7 +455,7 @@ async function fetchPaginatedList(url: string): Promise<Results | Error> {
 
     page += 1;
     console.log(`Fetched page ${page} in ${(end - start) / 1000}s from ${cursor} count ${data.count}`);
-     
+
     results.push(...data.results);
     cursor = data.next || null;
   }
@@ -456,23 +469,24 @@ let promiseChain: Promise<Results | Error> = Promise.resolve([]);
 async function fetchPaginatedListSequentially(url: string | null): Promise<Results | Error> {
   const result = promiseChain.then(() => fetchPaginatedList(url));
   // Ensure the next call waits for the current call to finish
-  promiseChain = result.catch(() => new Error("Error: unexpected exception"));  // unsure if this needed
+  promiseChain = result.catch(() => new Error("Error: unexpected exception")); // unsure if this needed
   return result;
 }
 
 const provider = {
   description: "360Giving", // Name of the data provider. Displays as a tooltip when hovering over the logo. Also displays as a fallback if the source address for the image is broken.
-  logoSourceAddress: "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
-  logoTargetAddress: "https://360Giving.org" // Destination URL that the logo navigates to when selected.
-}
-
+  logoSourceAddress:
+    "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
+  logoTargetAddress: "https://360Giving.org", // Destination URL that the logo navigates to when selected.
+};
 
 // TODO: delete source url below
 const provider_findThatCharity = {
   description: "FindThatCharity", // Name of the data provider. Displays as a tooltip when hovering over the logo. Also displays as a fallback if the source address for the image is broken.
-  logoSourceAddress: "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
-  logoTargetAddress: "https://findthatcharity.uk" // Destination URL that the logo navigates to when selected.
-}
+  logoSourceAddress:
+    "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
+  logoTargetAddress: "https://findthatcharity.uk", // Destination URL that the logo navigates to when selected.
+};
 
 /**
  * Grants received
@@ -489,7 +503,7 @@ async function grants_received(org_id: string) {
       type: "Entity",
       text: `${org_id} not known to have received grants`,
       properties: { error: value.message },
-      provider: provider
+      provider: provider,
     };
   }
   const grants: Grant[] = value as Grant[];
@@ -497,14 +511,15 @@ async function grants_received(org_id: string) {
     type: "Entity",
     text: `${org_id} received ${value.length} grants`,
     properties: {
-      grants: mk_ExcelArray(grants.map(grant => [grant_to_excel(grant)]))
+      grants: mk_ExcelArray(grants.map((grant) => [grant_to_excel(grant)])),
     },
     provider: {
       description: `${org_id} on 360Giving`, // Name of the data provider. Displays as a tooltip when hovering over the logo. Also displays as a fallback if the source address for the image is broken.
-      logoSourceAddress: "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
-      logoTargetAddress: "https://grantnav.threesixtygiving.org/org/" + org_id // Destination URL that the logo navigates to when selected.
-    }
-  }
+      logoSourceAddress:
+        "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
+      logoTargetAddress: "https://grantnav.threesixtygiving.org/org/" + org_id, // Destination URL that the logo navigates to when selected.
+    },
+  };
 }
 
 /**
@@ -522,7 +537,7 @@ async function grants_made(org_id: string) {
       type: "Entity",
       text: `${org_id} not known to have made grants`,
       properties: { error: value.message },
-      provider: provider
+      provider: provider,
     };
   }
   const grants: Grant[] = value as Grant[];
@@ -530,14 +545,15 @@ async function grants_made(org_id: string) {
     type: "Entity",
     text: `${org_id} made ${value.length} grants`,
     properties: {
-      grants: mk_ExcelArray(grants.map(grant => [ grant_to_excel(grant) ]))
+      grants: mk_ExcelArray(grants.map((grant) => [grant_to_excel(grant)])),
     },
     provider: {
       description: `${org_id} on 360Giving`, // Name of the data provider. Displays as a tooltip when hovering over the logo. Also displays as a fallback if the source address for the image is broken.
-      logoSourceAddress: "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
-      logoTargetAddress: "https://grantnav.threesixtygiving.org/org/"+org_id // Destination URL that the logo navigates to when selected.
-    }
-  }
+      logoSourceAddress:
+        "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
+      logoTargetAddress: "https://grantnav.threesixtygiving.org/org/" + org_id, // Destination URL that the logo navigates to when selected.
+    },
+  };
 }
 
 /**
@@ -549,7 +565,7 @@ async function grants_made(org_id: string) {
 async function who_funds_with_who(grants_column: string[][]) {
   const result: [ExcelString, ExcelString][] = [];
   const N = grants_column.length;
-  for(let r=0; r<N; r++) {
+  for (let r = 0; r < N; r++) {
     const csv = grants_column[r][0];
     const arr: string[] = csv.split(";");
     // calculate all permutations in funder pairs
@@ -563,8 +579,8 @@ async function who_funds_with_who(grants_column: string[][]) {
   }
   // declare empty dictionary that maps two strings to a count
   var dict: { [key: string]: number } = {};
-  for(let i=0; i<result.length; i++) {
-    const [a,b] = result[i];
+  for (let i = 0; i < result.length; i++) {
+    const [a, b] = result[i];
     const key = a.basicValue + ";" + b.basicValue;
     dict[key] = (dict[key] || 0) + 1;
   }
@@ -576,12 +592,12 @@ async function who_funds_with_who(grants_column: string[][]) {
     outcome.push([mk_ExcelString(arr[0]), mk_ExcelString(arr[1]), mk_ExcelDouble(value)]);
   }
 
-  const entity ={
+  const entity = {
     type: "Entity",
     text: `Who funds with who`,
     properties: {
-      who_funds_with_who: mk_ExcelArray(outcome)
-    }
+      who_funds_with_who: mk_ExcelArray(outcome),
+    },
   };
   return entity;
 }
@@ -598,14 +614,13 @@ async function findThatCharity(org_id: string) {
 
   const response = await fetch(org_url + ".json", { method: "GET" });
   if (!response.ok) {
-     return `Error! status: ${response.status}`;
+    return `Error! status: ${response.status}`;
   }
-  const charity = await response.json() as Charity;
+  const charity = (await response.json()) as Charity;
   console.log(charity);
   const result = charity_to_excel(org_url, charity);
-  return result
+  return result;
 }
-
 
 // 2021-03-08
 // 2021-01-19T00:00:00+00:00
@@ -620,7 +635,7 @@ function string_to_date(date_as_string: string) {
   // Excel date is number of days since 1900-01-01
   // https://stackoverflow.com/questions/70804856/convert-javascript-date-object-to-excel-serial-date-number
   const date = new Date(date_as_string);
-  let days = 25569.0 + ((date.getTime() - (date.getTimezoneOffset() * 60 * 1000)) / (1000 * 60 * 60 * 24));
+  let days = 25569.0 + (date.getTime() - date.getTimezoneOffset() * 60 * 1000) / (1000 * 60 * 60 * 24);
   return {
     type: "FormattedNumber",
     basicValue: days,
@@ -632,20 +647,20 @@ function number_to_amount(number: number, currency: string): ExcelFormattedNumbe
   return {
     type: "FormattedNumber",
     basicValue: number,
-    numberFormat: currency=="GBP" ? "£* #,##0.00" : "* #,##0.00",
+    numberFormat: currency == "GBP" ? "£* #,##0.00" : "* #,##0.00",
     propertyMetadata: {
-      sublabel: currency
-    }
+      sublabel: currency,
+    },
   };
 }
 
 function grant_to_excel(grant: Grant): ExcelValue {
   const data = grant.data;
   const amountAwarded: ExcelValue = number_to_amount(data.amountAwarded, data.currency);
-  const funder = data.fundingOrganization.map(org => org.name).join(",");
-  const recipient = data.recipientOrganization.map(org => org.name).join(",");
-  const funder_id = data.fundingOrganization.map(org => org.id).join(",");
-  const recipient_id = data.recipientOrganization.map(org => org.id).join(",");
+  const funder = data.fundingOrganization.map((org) => org.name).join(",");
+  const recipient = data.recipientOrganization.map((org) => org.name).join(",");
+  const funder_id = data.fundingOrganization.map((org) => org.id).join(",");
+  const recipient_id = data.recipientOrganization.map((org) => org.id).join(",");
   const entity: ExcelEntity = {
     type: "Entity",
     text: data.title,
@@ -659,8 +674,8 @@ function grant_to_excel(grant: Grant): ExcelValue {
       grant_id: grant.grant_id,
       funder_id: funder_id,
       recipient_id: recipient_id,
-      grant_nav: "https://grantnav.threesixtygiving.org/grant/"+grant.grant_id,
-      raw_grant_data: value_to_excel(grant)
+      grant_nav: "https://grantnav.threesixtygiving.org/grant/" + grant.grant_id,
+      raw_grant_data: value_to_excel(grant),
     },
     layouts: {
       compact: { icon: "Gift" },
@@ -669,23 +684,24 @@ function grant_to_excel(grant: Grant): ExcelValue {
         sections: [
           {
             layout: "List",
-            properties: ["awardDate", "funder", "recipient", "amountAwarded","description" ]
+            properties: ["awardDate", "funder", "recipient", "amountAwarded", "description"],
           },
           {
             layout: "List",
             title: "More",
-            properties: ["grant_id","funder_id","recipient_id","grant_nav","raw_grant_data"],
+            properties: ["grant_id", "funder_id", "recipient_id", "grant_nav", "raw_grant_data"],
             collapsible: true,
-            collapsed: true
-          }
-        ]
-      }
+            collapsed: true,
+          },
+        ],
+      },
     },
     provider: {
       description: data.title + " on 360Giving GrantNav", // Name of the data provider. Displays as a tooltip when hovering over the logo. Also displays as a fallback if the source address for the image is broken.
-      logoSourceAddress: "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
-      logoTargetAddress: "https://grantnav.threesixtygiving.org/grant/"+grant.grant_id // Destination URL that the logo navigates to when selected.
-    }
+      logoSourceAddress:
+        "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
+      logoTargetAddress: "https://grantnav.threesixtygiving.org/grant/" + grant.grant_id, // Destination URL that the logo navigates to when selected.
+    },
   };
   return entity;
 }
@@ -699,16 +715,17 @@ function charity_to_excel(org_url: string, charity: Charity): ExcelValue {
       organisationTypePrimary: charity.organisationTypePrimary,
       description: value_to_excel(charity.description),
       latestFinancialYearEnd: string_to_date(charity.latestFinancialYearEnd) as ExcelValue,
-      latestIncome: (charity.latestIncome==null ? nullErrorValue : number_to_amount(charity.latestIncome, "GBP")),
-      latestSpending: (charity.latestSpending==null ? nullErrorValue : number_to_amount(charity.latestSpending, "GBP")),
+      latestIncome: charity.latestIncome == null ? nullErrorValue : number_to_amount(charity.latestIncome, "GBP"),
+      latestSpending: charity.latestSpending == null ? nullErrorValue : number_to_amount(charity.latestSpending, "GBP"),
       latestEmployees: value_to_excel(charity.latestEmployees),
       latestVolunteers: value_to_excel(charity.latestVolunteers),
       trusteeCount: value_to_excel(charity.trusteeCount),
 
       telephone: value_to_excel(charity.telephone),
       email: value_to_excel(charity.email),
-      location: charity.location.map(loc => loc.name).join(","),
-      address: charity.address.streetAddress + ", " + charity.address.addressLocality + ", " + charity.address.postalCode,
+      location: charity.location.map((loc) => loc.name).join(","),
+      address:
+        charity.address.streetAddress + ", " + charity.address.addressLocality + ", " + charity.address.postalCode,
       url: value_to_excel(charity.url),
 
       id: charity.id,
@@ -716,18 +733,18 @@ function charity_to_excel(org_url: string, charity: Charity): ExcelValue {
       companyNumber: value_to_excel(charity.companyNumber),
       active: { type: "Boolean", basicValue: charity.active },
       dateRegistered: string_to_date(charity.dateRegistered) as ExcelValue,
-      dateRemoved: (charity.dateRemoved==null ? "not applicable" : string_to_date(charity.dateRemoved)) as ExcelValue,
-      
+      dateRemoved: (charity.dateRemoved == null ? "not applicable" : string_to_date(charity.dateRemoved)) as ExcelValue,
+
       parent: value_to_excel(charity.parent),
       organisationType: charity.organisationType.join(","),
       alternateName: charity.alternateName.join(","),
-      
+
       sources: charity.sources.join(","),
-      links: charity.links.map(link => link.site + ": " + link.url).join(","),
+      links: charity.links.map((link) => link.site + ": " + link.url).join(","),
       orgIDs: charity.orgIDs.join(","),
-      linked_records: charity.linked_records.map(rec => rec.orgid + ": " + rec.url).join(","),
+      linked_records: charity.linked_records.map((rec) => rec.orgid + ": " + rec.url).join(","),
       dateModified: string_to_date(charity.dateModified) as ExcelValue,
-      raw_charity_data: value_to_excel(charity)
+      raw_charity_data: value_to_excel(charity),
     },
     layouts: {
       compact: { icon: "Organization" },
@@ -736,44 +753,71 @@ function charity_to_excel(org_url: string, charity: Charity): ExcelValue {
         sections: [
           {
             layout: "List",
-            properties: ["description"]
-          }, {
+            properties: ["description"],
+          },
+          {
             layout: "List",
             title: `${charity.active ? "Active" : "Inactive"} ${charity.organisationTypePrimary}, number ${charity.charityNumber} since ${charity.dateRegistered}`,
-            properties: ["id", "charityNumber", "companyNumber",
-              "organisationTypePrimary", "active", "dateRegistered", "dateRemoved", "parent", "organisationType", "alternateName"],
+            properties: [
+              "id",
+              "charityNumber",
+              "companyNumber",
+              "organisationTypePrimary",
+              "active",
+              "dateRegistered",
+              "dateRemoved",
+              "parent",
+              "organisationType",
+              "alternateName",
+            ],
             collapsible: true,
-            collapsed: true
+            collapsed: true,
           },
           {
             layout: "List",
             title: "People and Financials",
-            properties: ["latestFinancialYearEnd", "latestIncome", "latestSpending", "latestEmployees", "latestVolunteers", "trusteeCount"],
+            properties: [
+              "latestFinancialYearEnd",
+              "latestIncome",
+              "latestSpending",
+              "latestEmployees",
+              "latestVolunteers",
+              "trusteeCount",
+            ],
             collapsible: true,
-            collapsed: false
+            collapsed: false,
           },
           {
             layout: "List",
             title: "Contact",
             properties: ["telephone", "email", "address", "url"],
             collapsible: true,
-            collapsed: false
+            collapsed: false,
           },
           {
             layout: "List",
             title: "More",
-            properties: ["sources", "location", "links", "orgIDs", "linked_records", "dateModified", "raw_charity_data"],
+            properties: [
+              "sources",
+              "location",
+              "links",
+              "orgIDs",
+              "linked_records",
+              "dateModified",
+              "raw_charity_data",
+            ],
             collapsible: true,
-            collapsed: true
-          }
-        ]
-      }
+            collapsed: true,
+          },
+        ],
+      },
     },
     provider: {
       description: charity.name + " on FindThatCharity", // Name of the data provider. Displays as a tooltip when hovering over the logo. Also displays as a fallback if the source address for the image is broken.
-      logoSourceAddress: "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
-      logoTargetAddress: org_url // Destination URL that the logo navigates to when selected.
-    }
+      logoSourceAddress:
+        "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
+      logoTargetAddress: org_url, // Destination URL that the logo navigates to when selected.
+    },
   };
   return entity;
 }
@@ -786,7 +830,7 @@ function charity_to_excel(org_url: string, charity: Charity): ExcelValue {
  */
 async function get_json(url) {
   const options = {
-    method: "GET"
+    method: "GET",
   };
 
   //console.log(url);
@@ -814,7 +858,7 @@ async function get_json(url) {
  */
 async function get_json_lines(url) {
   const options = {
-    method: "GET"
+    method: "GET",
   };
 
   //console.log(url);
@@ -859,9 +903,9 @@ async function post_json(url, json_data) {
   const options = {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: json_data
+    body: json_data,
   };
 
   //console.log(options);
@@ -901,26 +945,26 @@ function parse_JSON(json: string) {
   return value_to_excel(obj);
 }
 
-function value_to_excel(value:any): ExcelValue {
+function value_to_excel(value: any): ExcelValue {
   // recall that typeof null == "object"
   if (value == null) return nullErrorValue;
   switch (typeof value) {
     case "boolean":
       return {
         type: "Boolean",
-        basicValue: value
+        basicValue: value,
       };
 
     case "string":
       return {
         type: "String",
-        basicValue: value
+        basicValue: value,
       };
 
     case "number":
       return {
         type: "Double",
-        basicValue: value
+        basicValue: value,
       };
 
     case "object":
@@ -930,7 +974,7 @@ function value_to_excel(value:any): ExcelValue {
 
         var rows = new Array(length);
         for (var i = 0; i < length; i++) rows[i] = [value_to_non_array_excel(value[i])];
-        return mk_ExcelArray(rows)
+        return mk_ExcelArray(rows);
       }
 
       const obj = value as Object;
@@ -956,19 +1000,19 @@ function value_to_excel(value:any): ExcelValue {
       return {
         type: "Entity",
         text: keys,
-        properties: outcome
+        properties: outcome,
       };
 
     default:
       return {
         type: "String",
-        basicValue: "DEFAULT - unexpected"
+        basicValue: "DEFAULT - unexpected",
       };
   }
 }
 
 // Excel does not support an array nested inside another, so wrap in an entity
-function value_to_non_array_excel(value:any): ExcelValue {
+function value_to_non_array_excel(value: any): ExcelValue {
   if (value == null) return nullErrorValue;
   const excel = value_to_excel(value);
   switch (typeof value) {
@@ -977,7 +1021,7 @@ function value_to_non_array_excel(value:any): ExcelValue {
         return {
           type: "Entity",
           text: "Nested array",
-          properties: { array: excel }
+          properties: { array: excel },
         };
       }
       return excel;
