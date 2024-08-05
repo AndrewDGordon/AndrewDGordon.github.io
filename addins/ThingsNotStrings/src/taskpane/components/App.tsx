@@ -31,7 +31,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     },
     {
       icon: <DesignIdeas24Regular />,
-      primaryText: 'Try the formula=THINGSNOTSTRINGS.FINDTHATCHARITY("GB-CHC-1164883")',
+      primaryText: 'Try the formula =THINGSNOTSTRINGS.FINDTHATCHARITY("GB-CHC-1164883")',
     },
   ];
 
