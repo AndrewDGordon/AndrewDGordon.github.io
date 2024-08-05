@@ -27,11 +27,11 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     },
     {
       icon: <LockOpen24Regular />,
-      primaryText: "Unlock features and functionality",
+      primaryText: "Visit the project home: https://andrewdgordon.github.io/addins/ThingsNotStrings/",
     },
     {
       icon: <DesignIdeas24Regular />,
-      primaryText: "Create and visualize like a pro",
+      primaryText: 'Try the formula=THINGSNOTSTRINGS.FINDTHATCHARITY("GB-CHC-1164883")',
     },
   ];
 
