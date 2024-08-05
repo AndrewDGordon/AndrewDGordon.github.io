@@ -22,7 +22,8 @@ module.exports = async (env, options) => {
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
-      taskpane: ["./src/taskpane/taskpane.ts", "./src/taskpane/taskpane.html"],
+      vendor: ["react", "react-dom", "core-js", "@fluentui/react-components", "@fluentui/react-icons"],
+      taskpane: ["./src/taskpane/index.tsx", "./src/taskpane/taskpane.html"],
       commands: "./src/commands/commands.ts",
       functions: "./src/functions/functions.ts",
     },
@@ -30,7 +31,7 @@ module.exports = async (env, options) => {
       clean: true,
     },
     resolve: {
-      extensions: [".ts", ".html", ".js"],
+      extensions: [".ts", ".tsx", ".html", ".js"],
     },
     module: {
       rules: [
@@ -43,6 +44,11 @@ module.exports = async (env, options) => {
               presets: ["@babel/preset-typescript"],
             },
           },
+        },
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: ["ts-loader"],
         },
         {
           test: /\.html$/,
@@ -66,7 +72,7 @@ module.exports = async (env, options) => {
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
         template: "./src/taskpane/taskpane.html",
-        chunks: ["polyfill", "taskpane", "functions", "commands"],
+        chunks: ["polyfill", "vendor", "taskpane", "functions", "commands"],
       }),
       new CopyWebpackPlugin({
         patterns: [
