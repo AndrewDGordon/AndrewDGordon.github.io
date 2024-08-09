@@ -1,4 +1,5 @@
 // for accessing findThatCharity.org
+/* global clearInterval, console, CustomFunctions, setInterval */
 
 import { Card, ExcelValue, ExcelArray, ExcelDouble, ExcelEntity, ExcelError, ExcelFormattedNumber, ExcelString } from "./types";
 import { nullErrorValue, mk_ExcelArray, mk_ExcelString, mk_ExcelDouble } from "./types";

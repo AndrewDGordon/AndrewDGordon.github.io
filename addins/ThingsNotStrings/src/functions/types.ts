@@ -1,3 +1,5 @@
+/* global clearInterval, console, CustomFunctions, setInterval */
+
 // Documentation: https://docs.microsoft.com/en-us/office/dev/add-ins/excel/excel-data-types-overview
 // Types of custom functions: https://learn.microsoft.com/en-us/office/dev/add-ins/excel/custom-functions-json-autogeneration
 // Data type explorer: https://github.com/OfficeDev/Office-Add-in-samples/blob/main/Samples/excel-data-types-explorer/src/taskpane/taskpane.ts

@@ -28,7 +28,7 @@ module.exports = async (env, options) => {
       functions: [
         "./src/functions/types.ts",
         "./src/functions/findThatCharity.ts",
-        "./src/functions/360Giving.ts",
+        "./src/functions/360Giving.ts"
       ],
     },
     output: {
@@ -70,12 +70,12 @@ module.exports = async (env, options) => {
     },
     plugins: [
       new CustomFunctionsMetadataPlugin({
+        output: "functions.json",
         input: [
           "./src/functions/types.ts",
           "./src/functions/findThatCharity.ts",
-          "./src/functions/360Giving.ts",
-        ],
-        output: "functions.json"
+          "./src/functions/360Giving.ts"
+        ]        
       }),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
