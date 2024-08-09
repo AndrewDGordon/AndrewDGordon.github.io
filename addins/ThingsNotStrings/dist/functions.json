@@ -2,6 +2,18 @@
     "allowCustomDataForDataTypeAny": true,
     "functions": [
         {
+            "description": "Entity from URL",
+            "id": "ENTITY_FROM_URL",
+            "name": "ENTITY_FROM_URL",
+            "parameters": [
+                {
+                    "name": "url",
+                    "type": "string"
+                }
+            ],
+            "result": {}
+        },
+        {
             "description": "Adds two numbers.",
             "id": "ADD",
             "name": "ADD",

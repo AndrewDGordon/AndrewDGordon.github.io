@@ -5,6 +5,26 @@ import { MyType, y } from "./types";
 const x: MyType = "foo" + y;
 
 /**
+ * Entity from URL
+ * @customfunction
+ * @param {string} url 
+ * @returns {any} Results of the query.
+ */
+async function entity_from_url(url: string) {
+  const response = await fetch(url, { method: "GET" });
+  if (!response.ok) {
+    return `Error! status: ${response.status}`;
+  }
+
+  return {
+    type: "Entity",
+    text: `${url}`,
+    properties: { length: response.text.length, text: response.text }
+    //provider: provider,
+  }
+}
+
+/**
  * Adds two numbers.
  * @customfunction
  * @param first First number
