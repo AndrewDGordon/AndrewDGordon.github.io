@@ -25,7 +25,11 @@ module.exports = async (env, options) => {
       vendor: ["react", "react-dom", "core-js", "@fluentui/react-components", "@fluentui/react-icons"],
       taskpane: ["./src/taskpane/index.tsx", "./src/taskpane/taskpane.html"],
       commands: "./src/commands/commands.ts",
-      functions: "./src/functions/functions.ts",
+      functions: [
+        "./src/functions/types.ts",
+        "./src/functions/findThatCharity.ts",
+        "./src/functions/360Giving.ts",
+      ],
     },
     output: {
       clean: true,
@@ -66,8 +70,12 @@ module.exports = async (env, options) => {
     },
     plugins: [
       new CustomFunctionsMetadataPlugin({
-        output: "functions.json",
-        input: "./src/functions/functions.ts",
+        input: [
+          "./src/functions/types.ts",
+          "./src/functions/findThatCharity.ts",
+          "./src/functions/360Giving.ts",
+        ],
+        output: "functions.json"
       }),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",

@@ -2,147 +2,6 @@
     "allowCustomDataForDataTypeAny": true,
     "functions": [
         {
-            "description": "Entity from URL",
-            "id": "ENTITY_FROM_URL",
-            "name": "ENTITY_FROM_URL",
-            "parameters": [
-                {
-                    "name": "url",
-                    "type": "string"
-                }
-            ],
-            "result": {}
-        },
-        {
-            "description": "Adds two numbers.",
-            "id": "ADD",
-            "name": "ADD",
-            "parameters": [
-                {
-                    "description": "First number",
-                    "name": "first",
-                    "type": "number"
-                },
-                {
-                    "description": "Second number",
-                    "name": "second",
-                    "type": "number"
-                }
-            ],
-            "result": {
-                "type": "number"
-            }
-        },
-        {
-            "description": "Displays the current time once a second.",
-            "id": "CLOCK",
-            "name": "CLOCK",
-            "options": {
-                "stream": true
-            },
-            "parameters": [],
-            "result": {
-                "type": "string"
-            }
-        },
-        {
-            "description": "Increments a value once a second.",
-            "id": "INCREMENT",
-            "name": "INCREMENT",
-            "options": {
-                "stream": true
-            },
-            "parameters": [
-                {
-                    "description": "Amount to increment",
-                    "name": "incrementBy",
-                    "type": "number"
-                }
-            ],
-            "result": {
-                "type": "number"
-            }
-        },
-        {
-            "description": "Writes a message to console.log().",
-            "id": "LOG",
-            "name": "LOG",
-            "parameters": [
-                {
-                    "description": "String to write.",
-                    "name": "message",
-                    "type": "string"
-                }
-            ],
-            "result": {
-                "type": "string"
-            }
-        },
-        {
-            "description": "Grants received",
-            "id": "GRANTS_RECEIVED",
-            "name": "GRANTS_RECEIVED",
-            "parameters": [
-                {
-                    "name": "org_id",
-                    "type": "string"
-                }
-            ],
-            "result": {}
-        },
-        {
-            "description": "Grants made",
-            "id": "GRANTS_MADE",
-            "name": "GRANTS_MADE",
-            "parameters": [
-                {
-                    "name": "org_id",
-                    "type": "string"
-                }
-            ],
-            "result": {}
-        },
-        {
-            "description": "Who funds with who",
-            "id": "WHO_FUNDS_WITH_WHO",
-            "name": "WHO_FUNDS_WITH_WHO",
-            "parameters": [
-                {
-                    "description": "1D array of grant entities",
-                    "dimensionality": "matrix",
-                    "name": "grants_column",
-                    "type": "string"
-                }
-            ],
-            "result": {
-                "dimensionality": "matrix"
-            }
-        },
-        {
-            "description": "FindThatCharity",
-            "id": "FINDTHATCHARITY",
-            "name": "FINDTHATCHARITY",
-            "parameters": [
-                {
-                    "name": "org_id",
-                    "type": "string"
-                }
-            ],
-            "result": {}
-        },
-        {
-            "description": "Interpret string as Excel date",
-            "id": "STRING_TO_DATE",
-            "name": "STRING_TO_DATE",
-            "parameters": [
-                {
-                    "name": "date_as_string",
-                    "type": "string"
-                }
-            ],
-            "result": {}
-        },
-        {
             "description": "GET JSON from URL.",
             "id": "GET_JSON",
             "name": "GET_JSON",
@@ -207,6 +66,70 @@
                 }
             ],
             "result": {}
+        },
+        {
+            "description": "Interpret string as Excel date",
+            "id": "STRING_TO_DATE",
+            "name": "STRING_TO_DATE",
+            "parameters": [
+                {
+                    "name": "date_as_string",
+                    "type": "string"
+                }
+            ],
+            "result": {}
+        },
+        {
+            "description": "FindThatCharity",
+            "id": "FINDTHATCHARITY",
+            "name": "FINDTHATCHARITY",
+            "parameters": [
+                {
+                    "name": "org_id",
+                    "type": "string"
+                }
+            ],
+            "result": {}
+        },
+        {
+            "description": "Grants received",
+            "id": "GRANTS_RECEIVED",
+            "name": "GRANTS_RECEIVED",
+            "parameters": [
+                {
+                    "name": "org_id",
+                    "type": "string"
+                }
+            ],
+            "result": {}
+        },
+        {
+            "description": "Grants made",
+            "id": "GRANTS_MADE",
+            "name": "GRANTS_MADE",
+            "parameters": [
+                {
+                    "name": "org_id",
+                    "type": "string"
+                }
+            ],
+            "result": {}
+        },
+        {
+            "description": "Who funds with who",
+            "id": "WHO_FUNDS_WITH_WHO",
+            "name": "WHO_FUNDS_WITH_WHO",
+            "parameters": [
+                {
+                    "description": "1D array of grant entities",
+                    "dimensionality": "matrix",
+                    "name": "grants_column",
+                    "type": "string"
+                }
+            ],
+            "result": {
+                "dimensionality": "matrix"
+            }
         }
     ]
 }
