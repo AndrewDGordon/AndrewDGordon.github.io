@@ -9,5 +9,5 @@
 Office.onReady(() => {
   const versionInfo = document.getElementById("version-info");
   versionInfo.textContent = `taskpane.ts: Version Timestamp: ${VERSION_TIMESTAMP}`;
-  console.log("Version Timestamp: " + VERSION_TIMESTAMP);
+  console.log("taskpane Version Timestamp: " + VERSION_TIMESTAMP);
 });
