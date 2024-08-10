@@ -81,6 +81,18 @@
         },
         {
             "description": "FindThatCharity",
+            "id": "FINDTHATCHARITYTEST",
+            "name": "FINDTHATCHARITYTEST",
+            "parameters": [
+                {
+                    "name": "org_id",
+                    "type": "string"
+                }
+            ],
+            "result": {}
+        },
+        {
+            "description": "FindThatCharity",
             "id": "FINDTHATCHARITY",
             "name": "FINDTHATCHARITY",
             "parameters": [
