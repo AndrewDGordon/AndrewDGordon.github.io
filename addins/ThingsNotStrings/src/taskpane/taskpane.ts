@@ -8,6 +8,6 @@
 // The initialize function must be run each time a new page is loaded
 Office.onReady(() => {
   const versionInfo = document.getElementById("version-info");
-  versionInfo.textContent = `Version Timestamp: ${VERSION_TIMESTAMP}`;
+  versionInfo.textContent = `taskpane.ts: Version Timestamp: ${VERSION_TIMESTAMP}`;
   console.log("Version Timestamp: " + VERSION_TIMESTAMP);
 });
