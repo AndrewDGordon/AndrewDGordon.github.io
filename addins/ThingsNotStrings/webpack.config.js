@@ -70,7 +70,7 @@ module.exports = async (env, options) => {
     },
     plugins: [
       new webpack.DefinePlugin({
-        VERSION_TIMESTAMP: JSON.stringify(new Date().toISOString()),
+        VERSION_TIMESTAMP: JSON.stringify(new Date().toLocaleString()),
       }),
       new CustomFunctionsMetadataPlugin({
         output: "functions.json",

@@ -10,12 +10,7 @@ Office.onReady(() => {
   if (rootElement) {
     rootElement.innerHTML = `<div>${title} ${VERSION_TIMESTAMP}</div>`;
   }
+  else {
+    console.error("Root element not found");
+  }
 });
-
-if ((module as any).hot) {
-  (module as any).hot.accept("./components/App", () => {
-    if (rootElement) {
-      rootElement.innerHTML = `<div>${title}</div>`;
-    }
-  });
-}
