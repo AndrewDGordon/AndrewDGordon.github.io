@@ -1,0 +1,1 @@
+declare const VERSION_TIMESTAMP: string;

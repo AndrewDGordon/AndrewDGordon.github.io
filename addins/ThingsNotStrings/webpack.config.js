@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 
+const webpack = require("webpack");
 const devCerts = require("office-addin-dev-certs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CustomFunctionsMetadataPlugin = require("custom-functions-metadata-plugin");
@@ -69,6 +70,9 @@ module.exports = async (env, options) => {
       ],
     },
     plugins: [
+      new webpack.DefinePlugin({
+        VERSION_TIMESTAMP: JSON.stringify(new Date().toISOString()),
+      }),
       new CustomFunctionsMetadataPlugin({
         output: "functions.json",
         input: [
