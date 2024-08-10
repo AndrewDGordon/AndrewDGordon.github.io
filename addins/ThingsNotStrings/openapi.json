@@ -1,0 +1,4071 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Find that Charity API",
+        "version": "1.0",
+        "description": "Search for information about charities and other non-profit organisations"
+    },
+    "paths": {
+        "/api/v1/organisations": {
+            "get": {
+                "operationId": "ftc_api_organisations_get_organisation_list",
+                "summary": "Get Organisation List",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "organisationType",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "Organisationtype",
+                            "type": "array"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "org_id",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "Org Id",
+                            "type": "array"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "active",
+                        "schema": {
+                            "default": true,
+                            "title": "Active",
+                            "type": "boolean"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "default": 1,
+                            "title": "Page",
+                            "type": "integer"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "default": 10,
+                            "title": "Limit",
+                            "type": "integer"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrganisationResultList"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Organisations"
+                ]
+            },
+            "post": {
+                "operationId": "ftc_api_organisations_get_organisation_list",
+                "summary": "Get Organisation List",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "organisationType",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "Organisationtype",
+                            "type": "array"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "org_id",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "Org Id",
+                            "type": "array"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "active",
+                        "schema": {
+                            "default": true,
+                            "title": "Active",
+                            "type": "boolean"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "default": 1,
+                            "title": "Page",
+                            "type": "integer"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "default": 10,
+                            "title": "Limit",
+                            "type": "integer"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrganisationResultList"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Organisations"
+                ]
+            }
+        },
+        "/api/v1/organisations/_random": {
+            "get": {
+                "operationId": "ftc_api_organisations_get_random_organisation",
+                "summary": "Get Random Organisation",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "active_only",
+                        "schema": {
+                            "default": false,
+                            "title": "Active Only",
+                            "type": "boolean"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "organisation_type",
+                        "schema": {
+                            "default": "registered-charity",
+                            "title": "Organisation Type",
+                            "type": "string"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrganisationResult"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "Get a random charity record",
+                "tags": [
+                    "Organisations"
+                ]
+            }
+        },
+        "/api/v1/organisations/{organisation_id}": {
+            "get": {
+                "operationId": "ftc_api_organisations_get_organisation",
+                "summary": "Get Organisation",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "organisation_id",
+                        "schema": {
+                            "title": "Organisation Id",
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrganisationResult"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Organisations"
+                ]
+            }
+        },
+        "/api/v1/organisations/{organisation_id}/canonical": {
+            "get": {
+                "operationId": "ftc_api_organisations_get_canonical_organisation",
+                "summary": "Get Canonical Organisation",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "organisation_id",
+                        "schema": {
+                            "title": "Organisation Id",
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrganisationResult"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Organisations"
+                ]
+            }
+        },
+        "/api/v1/organisations/{organisation_id}/linked": {
+            "get": {
+                "operationId": "ftc_api_organisations_get_linked_organisations",
+                "summary": "Get Linked Organisations",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "organisation_id",
+                        "schema": {
+                            "title": "Organisation Id",
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrganisationResultList"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Organisations"
+                ]
+            }
+        },
+        "/api/v1/organisations/{organisation_id}/source": {
+            "get": {
+                "operationId": "ftc_api_organisations_get_organisation_source",
+                "summary": "Get Organisation Source",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "organisation_id",
+                        "schema": {
+                            "title": "Organisation Id",
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SourceResult"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Organisations"
+                ]
+            }
+        },
+        "/api/v1/charities/{charity_id}": {
+            "get": {
+                "operationId": "charity_api_charities_get_charity",
+                "summary": "Get Charity",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "charity_id",
+                        "schema": {
+                            "title": "Charity Id",
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CharityResult"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Charities"
+                ]
+            }
+        },
+        "/api/v1/charities/{charity_id}/financial/latest": {
+            "get": {
+                "operationId": "charity_api_charities_get_charity_finance_latest",
+                "summary": "Get Charity Finance Latest",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "charity_id",
+                        "schema": {
+                            "title": "Charity Id",
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CharityFinancialResult"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Charities"
+                ]
+            }
+        },
+        "/api/v1/charities/{charity_id}/financial/{date}": {
+            "get": {
+                "operationId": "charity_api_charities_get_charity_finance_by_date",
+                "summary": "Get Charity Finance By Date",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "charity_id",
+                        "schema": {
+                            "title": "Charity Id",
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "date",
+                        "schema": {
+                            "format": "date",
+                            "title": "Date",
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CharityFinancialResult"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Charities"
+                ]
+            }
+        },
+        "/api/v1/companies/{company_number}": {
+            "get": {
+                "operationId": "ftc_api_companies_get_company",
+                "summary": "Get Company",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "company_number",
+                        "schema": {
+                            "title": "Company Number",
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CompanyResult"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Companies"
+                ]
+            }
+        },
+        "/api/v1/reconcile/": {
+            "get": {
+                "operationId": "reconcile_api_reconcile_all_get_service_spec",
+                "summary": "Service specification for reconciling against any nonprofit organisation",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "queries",
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Queries"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "extend",
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Extend"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ServiceSpec"
+                                        },
+                                        {
+                                            "additionalProperties": {
+                                                "$ref": "#/components/schemas/ReconciliationResult"
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/DataExtensionQueryResponse"
+                                        }
+                                    ],
+                                    "title": "Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "Get the service specification for reconciling against any nonprofit organisation",
+                "tags": [
+                    "Reconciliation (nonprofits)"
+                ]
+            },
+            "post": {
+                "operationId": "reconcile_api_reconcile_all_reconcile_entities",
+                "summary": "Reconciliation endpoint for reconciling against any nonprofit organisation",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "additionalProperties": {
+                                                "$ref": "#/components/schemas/ReconciliationResult"
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/DataExtensionQueryResponse"
+                                        }
+                                    ],
+                                    "title": "Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "Reconciling queries against any nonprofit organisation.",
+                "tags": [
+                    "Reconciliation (nonprofits)"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "title": "FormParams",
+                                "type": "object",
+                                "properties": {
+                                    "queries": {
+                                        "anyOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "type": "null"
+                                            }
+                                        ],
+                                        "title": "Queries"
+                                    },
+                                    "extend": {
+                                        "anyOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "type": "null"
+                                            }
+                                        ],
+                                        "title": "Extend"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/api/v1/reconcile/preview": {
+            "get": {
+                "operationId": "reconcile_api_reconcile_all_preview",
+                "summary": "Preview",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "schema": {
+                            "title": "Id",
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "Reconciliation (nonprofits)"
+                ]
+            }
+        },
+        "/api/v1/reconcile/suggest/entity": {
+            "get": {
+                "operationId": "reconcile_api_reconcile_all_suggest_entity",
+                "summary": "Suggest Entity",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "prefix",
+                        "schema": {
+                            "title": "Prefix",
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "cursor",
+                        "schema": {
+                            "default": 0,
+                            "title": "Cursor",
+                            "type": "integer"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "type",
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Type"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuggestResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Reconciliation (nonprofits)"
+                ]
+            }
+        },
+        "/api/v1/reconcile/suggest/type": {
+            "get": {
+                "operationId": "reconcile_api_reconcile_all_suggest_type",
+                "summary": "Suggest Type",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "prefix",
+                        "schema": {
+                            "title": "Prefix",
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "cursor",
+                        "schema": {
+                            "default": 0,
+                            "title": "Cursor",
+                            "type": "integer"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuggestResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Reconciliation (nonprofits)"
+                ]
+            }
+        },
+        "/api/v1/reconcile/suggest/property": {
+            "get": {
+                "operationId": "reconcile_api_reconcile_all_suggest_property",
+                "summary": "Suggest Property",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "prefix",
+                        "schema": {
+                            "title": "Prefix",
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "cursor",
+                        "schema": {
+                            "default": 0,
+                            "title": "Cursor",
+                            "type": "integer"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuggestResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Reconciliation (nonprofits)"
+                ]
+            }
+        },
+        "/api/v1/reconcile/extend/propose": {
+            "get": {
+                "operationId": "reconcile_api_reconcile_all_propose_properties",
+                "summary": "Propose Properties",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "type",
+                        "schema": {
+                            "title": "Type",
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "default": 500,
+                            "title": "Limit",
+                            "type": "integer"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataExtensionPropertyProposalResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Reconciliation (nonprofits)"
+                ]
+            }
+        },
+        "/api/v1/reconcile/company": {
+            "get": {
+                "operationId": "reconcile_api_reconcile_company_get_company_service_spec",
+                "summary": "Get Company Service Spec",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "queries",
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Queries"
+                        },
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "extend",
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Extend"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ServiceSpec"
+                                        },
+                                        {
+                                            "additionalProperties": {
+                                                "$ref": "#/components/schemas/ReconciliationResult"
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/DataExtensionQueryResponse"
+                                        }
+                                    ],
+                                    "title": "Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Reconciliation (registered companies)"
+                ]
+            },
+            "post": {
+                "operationId": "reconcile_api_reconcile_company_company_reconcile_entities",
+                "summary": "Reconciliation endpoint for reconciling against registered companies",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "additionalProperties": {
+                                                "$ref": "#/components/schemas/ReconciliationResult"
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/DataExtensionQueryResponse"
+                                        }
+                                    ],
+                                    "title": "Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "Reconciling queries against registered companies.",
+                "tags": [
+                    "Reconciliation (registered companies)"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "title": "FormParams",
+                                "type": "object",
+                                "properties": {
+                                    "queries": {
+                                        "anyOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "type": "null"
+                                            }
+                                        ],
+                                        "title": "Queries"
+                                    },
+                                    "extend": {
+                                        "anyOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "type": "null"
+                                            }
+                                        ],
+                                        "title": "Extend"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/api/v1/reconcile/company/suggest/type": {
+            "get": {
+                "operationId": "reconcile_api_reconcile_company_company_suggest_type",
+                "summary": "Company Suggest Type",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "prefix",
+                        "schema": {
+                            "title": "Prefix",
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "cursor",
+                        "schema": {
+                            "default": 0,
+                            "title": "Cursor",
+                            "type": "integer"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuggestResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Reconciliation (registered companies)"
+                ]
+            }
+        },
+        "/api/v1/reconcile/company/suggest/property": {
+            "get": {
+                "operationId": "reconcile_api_reconcile_company_company_suggest_property",
+                "summary": "Company Suggest Property",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "prefix",
+                        "schema": {
+                            "title": "Prefix",
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "cursor",
+                        "schema": {
+                            "default": 0,
+                            "title": "Cursor",
+                            "type": "integer"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuggestResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Reconciliation (registered companies)"
+                ]
+            }
+        },
+        "/api/v1/reconcile/company/extend/propose": {
+            "get": {
+                "operationId": "reconcile_api_reconcile_company_company_propose_properties",
+                "summary": "Company Propose Properties",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "type",
+                        "schema": {
+                            "title": "Type",
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "default": 500,
+                            "title": "Limit",
+                            "type": "integer"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataExtensionPropertyProposalResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Reconciliation (registered companies)"
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "OrganisationIn": {
+                "properties": {
+                    "organisationType": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "title": "Organisationtype",
+                        "type": "array"
+                    },
+                    "org_id": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "title": "Org Id",
+                        "type": "array"
+                    },
+                    "active": {
+                        "default": true,
+                        "title": "Active",
+                        "type": "boolean"
+                    },
+                    "page": {
+                        "default": 1,
+                        "title": "Page",
+                        "type": "integer"
+                    },
+                    "limit": {
+                        "default": 10,
+                        "title": "Limit",
+                        "type": "integer"
+                    }
+                },
+                "title": "OrganisationIn",
+                "type": "object"
+            },
+            "Address": {
+                "properties": {
+                    "streetAddress": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Streetaddress"
+                    },
+                    "addressLocality": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Addresslocality"
+                    },
+                    "addressRegion": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Addressregion"
+                    },
+                    "addressCountry": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Addresscountry"
+                    },
+                    "postalCode": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Postalcode"
+                    }
+                },
+                "title": "Address",
+                "type": "object"
+            },
+            "Organisation": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "charityNumber": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Charitynumber"
+                    },
+                    "companyNumber": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Companynumber"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url"
+                    },
+                    "latestFinancialYearEnd": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Latestfinancialyearend"
+                    },
+                    "latestIncome": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Latestincome"
+                    },
+                    "latestSpending": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Latestspending"
+                    },
+                    "latestEmployees": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Latestemployees"
+                    },
+                    "latestVolunteers": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Latestvolunteers"
+                    },
+                    "trusteeCount": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Trusteecount"
+                    },
+                    "dateRegistered": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Dateregistered"
+                    },
+                    "dateRemoved": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Dateremoved"
+                    },
+                    "active": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Active"
+                    },
+                    "parent": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Parent"
+                    },
+                    "organisationType": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Organisationtype"
+                    },
+                    "organisationTypePrimary": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/OrganisationType"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "alternateName": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Alternatename"
+                    },
+                    "telephone": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Telephone"
+                    },
+                    "email": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Email"
+                    },
+                    "location": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Location"
+                    },
+                    "address": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/Address"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "sources": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Sources"
+                    },
+                    "links": {
+                        "items": {
+                            "$ref": "#/components/schemas/OrganisationWebsiteLink"
+                        },
+                        "title": "Links",
+                        "type": "array"
+                    },
+                    "orgIDs": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Orgids"
+                    },
+                    "linked_records": {
+                        "items": {
+                            "$ref": "#/components/schemas/OrganisationLink"
+                        },
+                        "title": "Linked Records",
+                        "type": "array"
+                    },
+                    "dateModified": {
+                        "anyOf": [
+                            {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Datemodified"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "title": "Organisation",
+                "type": "object"
+            },
+            "OrganisationLink": {
+                "properties": {
+                    "orgid": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Orgid"
+                    },
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url"
+                    }
+                },
+                "title": "OrganisationLink",
+                "type": "object"
+            },
+            "OrganisationResultList": {
+                "properties": {
+                    "success": {
+                        "default": true,
+                        "title": "Success",
+                        "type": "boolean"
+                    },
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
+                    },
+                    "params": {
+                        "default": {},
+                        "title": "Params",
+                        "type": "object"
+                    },
+                    "count": {
+                        "default": 0,
+                        "title": "Count",
+                        "type": "integer"
+                    },
+                    "next": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Next"
+                    },
+                    "previous": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Previous"
+                    },
+                    "result": {
+                        "items": {
+                            "$ref": "#/components/schemas/Organisation"
+                        },
+                        "title": "Result",
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "result"
+                ],
+                "title": "OrganisationResultList",
+                "type": "object"
+            },
+            "OrganisationType": {
+                "properties": {
+                    "slug": {
+                        "title": "Slug",
+                        "type": "string"
+                    },
+                    "title": {
+                        "title": "Title",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "slug",
+                    "title"
+                ],
+                "title": "OrganisationType",
+                "type": "object"
+            },
+            "OrganisationWebsiteLink": {
+                "properties": {
+                    "site": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Site"
+                    },
+                    "orgid": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Orgid"
+                    },
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url"
+                    }
+                },
+                "title": "OrganisationWebsiteLink",
+                "type": "object"
+            },
+            "ResultError": {
+                "properties": {
+                    "success": {
+                        "default": false,
+                        "title": "Success",
+                        "type": "boolean"
+                    },
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
+                    },
+                    "params": {
+                        "default": {},
+                        "title": "Params",
+                        "type": "object"
+                    },
+                    "result": {
+                        "anyOf": [
+                            {
+                                "items": {},
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Result"
+                    }
+                },
+                "title": "ResultError",
+                "type": "object"
+            },
+            "OrganisationResult": {
+                "properties": {
+                    "success": {
+                        "default": true,
+                        "title": "Success",
+                        "type": "boolean"
+                    },
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
+                    },
+                    "params": {
+                        "default": {},
+                        "title": "Params",
+                        "type": "object"
+                    },
+                    "result": {
+                        "$ref": "#/components/schemas/Organisation"
+                    }
+                },
+                "required": [
+                    "result"
+                ],
+                "title": "OrganisationResult",
+                "type": "object"
+            },
+            "Source": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "title": {
+                        "title": "Title",
+                        "type": "string"
+                    },
+                    "publisher": {
+                        "title": "Publisher",
+                        "type": "string"
+                    },
+                    "data": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Data"
+                    }
+                },
+                "required": [
+                    "id",
+                    "title",
+                    "publisher"
+                ],
+                "title": "Source",
+                "type": "object"
+            },
+            "SourceResult": {
+                "properties": {
+                    "success": {
+                        "default": true,
+                        "title": "Success",
+                        "type": "boolean"
+                    },
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
+                    },
+                    "params": {
+                        "default": {},
+                        "title": "Params",
+                        "type": "object"
+                    },
+                    "result": {
+                        "$ref": "#/components/schemas/Source"
+                    }
+                },
+                "required": [
+                    "result"
+                ],
+                "title": "SourceResult",
+                "type": "object"
+            },
+            "Charity": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "constitution": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Constitution"
+                    },
+                    "geographical_spread": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Geographical Spread"
+                    },
+                    "address": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Address"
+                    },
+                    "postcode": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Postcode"
+                    },
+                    "phone": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Phone"
+                    },
+                    "active": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Active"
+                    },
+                    "date_registered": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Date Registered"
+                    },
+                    "date_removed": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Date Removed"
+                    },
+                    "removal_reason": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Removal Reason"
+                    },
+                    "web": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Web"
+                    },
+                    "email": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Email"
+                    },
+                    "company_number": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Company Number"
+                    },
+                    "activities": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Activities"
+                    },
+                    "source": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Source"
+                    },
+                    "first_added": {
+                        "anyOf": [
+                            {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Added"
+                    },
+                    "last_updated": {
+                        "anyOf": [
+                            {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Updated"
+                    },
+                    "income": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Income"
+                    },
+                    "spending": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Spending"
+                    },
+                    "latest_fye": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Latest Fye"
+                    },
+                    "employees": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Employees"
+                    },
+                    "volunteers": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Volunteers"
+                    },
+                    "trustees": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Trustees"
+                    },
+                    "dual_registered": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Dual Registered"
+                    }
+                },
+                "title": "Charity",
+                "type": "object"
+            },
+            "CharityResult": {
+                "properties": {
+                    "success": {
+                        "default": true,
+                        "title": "Success",
+                        "type": "boolean"
+                    },
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
+                    },
+                    "params": {
+                        "default": {},
+                        "title": "Params",
+                        "type": "object"
+                    },
+                    "result": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/Charity"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "title": "CharityResult",
+                "type": "object"
+            },
+            "CharityFinancial": {
+                "properties": {
+                    "fyend": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Fyend"
+                    },
+                    "fystart": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Fystart"
+                    },
+                    "income": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Income"
+                    },
+                    "spending": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Spending"
+                    },
+                    "inc_leg": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Inc Leg"
+                    },
+                    "inc_end": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Inc End"
+                    },
+                    "inc_vol": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Inc Vol"
+                    },
+                    "inc_fr": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Inc Fr"
+                    },
+                    "inc_char": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Inc Char"
+                    },
+                    "inc_invest": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Inc Invest"
+                    },
+                    "inc_other": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Inc Other"
+                    },
+                    "inc_total": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Inc Total"
+                    },
+                    "invest_gain": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Invest Gain"
+                    },
+                    "asset_gain": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Asset Gain"
+                    },
+                    "pension_gain": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Pension Gain"
+                    },
+                    "exp_vol": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exp Vol"
+                    },
+                    "exp_trade": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exp Trade"
+                    },
+                    "exp_invest": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exp Invest"
+                    },
+                    "exp_grant": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exp Grant"
+                    },
+                    "exp_charble": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exp Charble"
+                    },
+                    "exp_gov": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exp Gov"
+                    },
+                    "exp_other": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exp Other"
+                    },
+                    "exp_total": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exp Total"
+                    },
+                    "exp_support": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exp Support"
+                    },
+                    "exp_dep": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exp Dep"
+                    },
+                    "reserves": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Reserves"
+                    },
+                    "asset_open": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Asset Open"
+                    },
+                    "asset_close": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Asset Close"
+                    },
+                    "fixed_assets": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Fixed Assets"
+                    },
+                    "open_assets": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Open Assets"
+                    },
+                    "invest_assets": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Invest Assets"
+                    },
+                    "cash_assets": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Cash Assets"
+                    },
+                    "current_assets": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Current Assets"
+                    },
+                    "credit_1": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Credit 1"
+                    },
+                    "credit_long": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Credit Long"
+                    },
+                    "pension_assets": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Pension Assets"
+                    },
+                    "total_assets": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Total Assets"
+                    },
+                    "funds_end": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Funds End"
+                    },
+                    "funds_restrict": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Funds Restrict"
+                    },
+                    "funds_unrestrict": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Funds Unrestrict"
+                    },
+                    "funds_total": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Funds Total"
+                    },
+                    "employees": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Employees"
+                    },
+                    "volunteers": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Volunteers"
+                    },
+                    "account_type": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Account Type"
+                    }
+                },
+                "title": "CharityFinancial",
+                "type": "object"
+            },
+            "CharityFinancialResult": {
+                "properties": {
+                    "success": {
+                        "default": true,
+                        "title": "Success",
+                        "type": "boolean"
+                    },
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
+                    },
+                    "params": {
+                        "default": {},
+                        "title": "Params",
+                        "type": "object"
+                    },
+                    "result": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/CharityFinancial"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "title": "CharityFinancialResult",
+                "type": "object"
+            },
+            "Company": {
+                "properties": {
+                    "CompanyName": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Companyname"
+                    },
+                    "CompanyNumber": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Companynumber"
+                    },
+                    "RegAddress_CareOf": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Regaddress Careof"
+                    },
+                    "RegAddress_POBox": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Regaddress Pobox"
+                    },
+                    "RegAddress_AddressLine1": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Regaddress Addressline1"
+                    },
+                    "RegAddress_AddressLine2": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Regaddress Addressline2"
+                    },
+                    "RegAddress_PostTown": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Regaddress Posttown"
+                    },
+                    "RegAddress_County": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Regaddress County"
+                    },
+                    "RegAddress_Country": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Regaddress Country"
+                    },
+                    "RegAddress_PostCode": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Regaddress Postcode"
+                    },
+                    "CompanyCategory": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Companycategory"
+                    },
+                    "CompanyStatus": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Companystatus"
+                    },
+                    "CountryOfOrigin": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Countryoforigin"
+                    },
+                    "DissolutionDate": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Dissolutiondate"
+                    },
+                    "IncorporationDate": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Incorporationdate"
+                    },
+                    "Accounts_AccountRefDay": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Accounts Accountrefday"
+                    },
+                    "Accounts_AccountRefMonth": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Accounts Accountrefmonth"
+                    },
+                    "Accounts_NextDueDate": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Accounts Nextduedate"
+                    },
+                    "Accounts_LastMadeUpDate": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Accounts Lastmadeupdate"
+                    },
+                    "Accounts_AccountCategory": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Accounts Accountcategory"
+                    },
+                    "Returns_NextDueDate": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Returns Nextduedate"
+                    },
+                    "Returns_LastMadeUpDate": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Returns Lastmadeupdate"
+                    },
+                    "Mortgages_NumMortCharges": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Mortgages Nummortcharges"
+                    },
+                    "Mortgages_NumMortOutstanding": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Mortgages Nummortoutstanding"
+                    },
+                    "Mortgages_NumMortPartSatisfied": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Mortgages Nummortpartsatisfied"
+                    },
+                    "Mortgages_NumMortSatisfied": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Mortgages Nummortsatisfied"
+                    },
+                    "LimitedPartnerships_NumGenPartners": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Limitedpartnerships Numgenpartners"
+                    },
+                    "LimitedPartnerships_NumLimPartners": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Limitedpartnerships Numlimpartners"
+                    },
+                    "ConfStmtNextDueDate": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confstmtnextduedate"
+                    },
+                    "ConfStmtLastMadeUpDate": {
+                        "anyOf": [
+                            {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Confstmtlastmadeupdate"
+                    },
+                    "org_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Org Id"
+                    }
+                },
+                "title": "Company",
+                "type": "object"
+            },
+            "CompanyResult": {
+                "properties": {
+                    "success": {
+                        "default": true,
+                        "title": "Success",
+                        "type": "boolean"
+                    },
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
+                    },
+                    "params": {
+                        "default": {},
+                        "title": "Params",
+                        "type": "object"
+                    },
+                    "result": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/Company"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "title": "CompanyResult",
+                "type": "object"
+            },
+            "ReconciliationQueryBatchForm": {
+                "properties": {
+                    "queries": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Queries"
+                    },
+                    "extend": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Extend"
+                    }
+                },
+                "title": "ReconciliationQueryBatchForm",
+                "type": "object"
+            },
+            "DataExtensionMetadata": {
+                "properties": {
+                    "propose_properties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DataExtensionPropertyProprosal"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "property_settings": {
+                        "default": [],
+                        "items": {
+                            "$ref": "#/components/schemas/DataExtensionPropertySetting"
+                        },
+                        "title": "Property Settings",
+                        "type": "array"
+                    }
+                },
+                "title": "DataExtensionMetadata",
+                "type": "object"
+            },
+            "DataExtensionPropertyProprosal": {
+                "properties": {
+                    "service_url": {
+                        "title": "Service Url",
+                        "type": "string"
+                    },
+                    "service_path": {
+                        "title": "Service Path",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "service_url",
+                    "service_path"
+                ],
+                "title": "DataExtensionPropertyProprosal",
+                "type": "object"
+            },
+            "DataExtensionPropertySetting": {
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "label": {
+                        "title": "Label",
+                        "type": "string"
+                    },
+                    "type": {
+                        "anyOf": [
+                            {
+                                "enum": [
+                                    "number",
+                                    "text",
+                                    "checkbox",
+                                    "select"
+                                ],
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Type"
+                    },
+                    "default": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Default"
+                    },
+                    "help_text": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Help Text"
+                    },
+                    "choices": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/PropertySettingChoice"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Choices"
+                    }
+                },
+                "required": [
+                    "name",
+                    "label"
+                ],
+                "title": "DataExtensionPropertySetting",
+                "type": "object"
+            },
+            "DataExtensionQueryResponse": {
+                "properties": {
+                    "meta": {
+                        "items": {
+                            "$ref": "#/components/schemas/Entity"
+                        },
+                        "title": "Meta",
+                        "type": "array"
+                    },
+                    "rows": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "title": "Rows",
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "meta",
+                    "rows"
+                ],
+                "title": "DataExtensionQueryResponse",
+                "type": "object"
+            },
+            "Entity": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "type": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/EntityType"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Type"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "title": "Entity",
+                "type": "object"
+            },
+            "EntityType": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "broader": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/EntityType"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Broader"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "title": "EntityType",
+                "type": "object"
+            },
+            "MatchingFeature": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "value": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "number"
+                            }
+                        ],
+                        "title": "Value"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "value"
+                ],
+                "title": "MatchingFeature",
+                "type": "object"
+            },
+            "OpenAPISecuritySchema": {
+                "properties": {
+                    "type": {
+                        "$ref": "#/components/schemas/OpenAPISecuritySchemeType"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "in_": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "In "
+                    },
+                    "scheme": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Scheme"
+                    },
+                    "bearerFormat": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Bearerformat"
+                    },
+                    "flows": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Flows"
+                    },
+                    "openIdConnectUrl": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Openidconnecturl"
+                    }
+                },
+                "required": [
+                    "type"
+                ],
+                "title": "OpenAPISecuritySchema",
+                "type": "object"
+            },
+            "OpenAPISecuritySchemeType": {
+                "enum": [
+                    "apiKey",
+                    "http",
+                    "mutualTLS",
+                    "oauth2",
+                    "openIdConnect"
+                ],
+                "title": "OpenAPISecuritySchemeType",
+                "type": "string"
+            },
+            "PreviewMetadata": {
+                "properties": {
+                    "url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Url"
+                    },
+                    "width": {
+                        "default": 430,
+                        "title": "Width",
+                        "type": "integer"
+                    },
+                    "height": {
+                        "default": 300,
+                        "title": "Height",
+                        "type": "integer"
+                    }
+                },
+                "title": "PreviewMetadata",
+                "type": "object"
+            },
+            "PropertySettingChoice": {
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "value": {
+                        "title": "Value",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "title": "PropertySettingChoice",
+                "type": "object"
+            },
+            "ReconciliationCandidate": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "type": {
+                        "default": [],
+                        "items": {
+                            "$ref": "#/components/schemas/EntityType"
+                        },
+                        "title": "Type",
+                        "type": "array"
+                    },
+                    "score": {
+                        "title": "Score",
+                        "type": "number"
+                    },
+                    "features": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/MatchingFeature"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Features"
+                    },
+                    "match": {
+                        "default": false,
+                        "title": "Match",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "score"
+                ],
+                "title": "ReconciliationCandidate",
+                "type": "object"
+            },
+            "ReconciliationResult": {
+                "properties": {
+                    "result": {
+                        "default": [],
+                        "items": {
+                            "$ref": "#/components/schemas/ReconciliationCandidate"
+                        },
+                        "title": "Result",
+                        "type": "array"
+                    }
+                },
+                "title": "ReconciliationResult",
+                "type": "object"
+            },
+            "ReconciliationServiceVersions": {
+                "enum": [
+                    "0.1",
+                    "0.2"
+                ],
+                "title": "ReconciliationServiceVersions",
+                "type": "string"
+            },
+            "ServiceSpec": {
+                "properties": {
+                    "versions": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/ReconciliationServiceVersions"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "default": [
+                            "0.2"
+                        ],
+                        "title": "Versions"
+                    },
+                    "name": {
+                        "default": "Reconciliation API",
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "identifierSpace": {
+                        "default": "http://org-id.guide",
+                        "title": "Identifierspace",
+                        "type": "string"
+                    },
+                    "schemaSpace": {
+                        "default": "https://schema.org",
+                        "title": "Schemaspace",
+                        "type": "string"
+                    },
+                    "defaultTypes": {
+                        "default": [],
+                        "items": {
+                            "$ref": "#/components/schemas/EntityType"
+                        },
+                        "title": "Defaulttypes",
+                        "type": "array"
+                    },
+                    "documentation": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Documentation"
+                    },
+                    "logo": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Logo"
+                    },
+                    "serviceVersion": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Serviceversion"
+                    },
+                    "view": {
+                        "$ref": "#/components/schemas/UrlSchema"
+                    },
+                    "feature_view": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/UrlSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "preview": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/PreviewMetadata"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "suggest": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ServiceSpecSuggest"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "extend": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DataExtensionMetadata"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "batchSize": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Batchsize"
+                    },
+                    "authentication": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/OpenAPISecuritySchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "view"
+                ],
+                "title": "ServiceSpec",
+                "type": "object"
+            },
+            "ServiceSpecSuggest": {
+                "properties": {
+                    "entity": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/SuggestMetadata"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "property": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/SuggestMetadata"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "type": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/SuggestMetadata"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "title": "ServiceSpecSuggest",
+                "type": "object"
+            },
+            "SuggestMetadata": {
+                "properties": {
+                    "service_url": {
+                        "title": "Service Url",
+                        "type": "string"
+                    },
+                    "service_path": {
+                        "title": "Service Path",
+                        "type": "string"
+                    },
+                    "flyout_service_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Flyout Service Url"
+                    },
+                    "flyout_service_path": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Flyout Service Path"
+                    }
+                },
+                "required": [
+                    "service_url",
+                    "service_path"
+                ],
+                "title": "SuggestMetadata",
+                "type": "object"
+            },
+            "UrlSchema": {
+                "properties": {
+                    "url": {
+                        "title": "Url",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "url"
+                ],
+                "title": "UrlSchema",
+                "type": "object"
+            },
+            "SuggestEntityQuery": {
+                "properties": {
+                    "prefix": {
+                        "title": "Prefix",
+                        "type": "string"
+                    },
+                    "cursor": {
+                        "default": 0,
+                        "title": "Cursor",
+                        "type": "integer"
+                    },
+                    "type": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Type"
+                    }
+                },
+                "required": [
+                    "prefix"
+                ],
+                "title": "SuggestEntityQuery",
+                "type": "object"
+            },
+            "SuggestResponse": {
+                "properties": {
+                    "result": {
+                        "items": {
+                            "$ref": "#/components/schemas/SuggestResult"
+                        },
+                        "title": "Result",
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "result"
+                ],
+                "title": "SuggestResponse",
+                "type": "object"
+            },
+            "SuggestResult": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "notable": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/EntityType"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Notable"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "title": "SuggestResult",
+                "type": "object"
+            },
+            "SuggestTypeQuery": {
+                "properties": {
+                    "prefix": {
+                        "title": "Prefix",
+                        "type": "string"
+                    },
+                    "cursor": {
+                        "default": 0,
+                        "title": "Cursor",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "prefix"
+                ],
+                "title": "SuggestTypeQuery",
+                "type": "object"
+            },
+            "DataExtensionPropertyProposalQuery": {
+                "properties": {
+                    "type": {
+                        "title": "Type",
+                        "type": "string"
+                    },
+                    "limit": {
+                        "default": 500,
+                        "title": "Limit",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "type"
+                ],
+                "title": "DataExtensionPropertyProposalQuery",
+                "type": "object"
+            },
+            "DataExtensionPropertyProposalResponse": {
+                "properties": {
+                    "properties": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Property"
+                        },
+                        "title": "Properties"
+                    },
+                    "type": {
+                        "title": "Type",
+                        "type": "string"
+                    },
+                    "limit": {
+                        "default": 10,
+                        "title": "Limit",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "properties",
+                    "type"
+                ],
+                "title": "DataExtensionPropertyProposalResponse",
+                "type": "object"
+            },
+            "Property": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "title": "Property",
+                "type": "object"
+            }
+        }
+    },
+    "servers": [],
+    "tags": [
+        {
+            "name": "Organisations"
+        },
+        {
+            "name": "Charities"
+        },
+        {
+            "name": "Companies"
+        },
+        {
+            "name": "Reconciliation (nonprofits)",
+            "externalDocs": {
+                "description": "Reconciliation Service API v0.2",
+                "url": "https://reconciliation-api.github.io/specs/latest/"
+            }
+        },
+        {
+            "name": "Reconciliation (registered companies)",
+            "externalDocs": {
+                "description": "Reconciliation Service API v0.2",
+                "url": "https://reconciliation-api.github.io/specs/latest/"
+            }
+        }
+    ]
+}
