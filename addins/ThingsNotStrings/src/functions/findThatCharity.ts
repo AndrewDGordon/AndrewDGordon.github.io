@@ -61,25 +61,49 @@ type Charity = {
   dateModified: string;
 };
 
+
 let promiseChain: Promise<Charity | Error> = Promise.resolve({} as Charity);
 
 async function directCall(url: string): Promise<Charity | Error> {
-  // Wait 200ms before each request to not go over the usage limit
+  // Wait (in milliseconds) before each request to not go over the usage limit
   await new Promise((resolve) => setTimeout(resolve, 200));
-  const response = await fetch(url + ".json", { method: "GET" });
+  const response = await fetch(url, { method: "GET" });
   if (!response.ok) {
     console.error(`Error! status: ${response.status}`);
     return new Error(`Error! status: ${response.status}`);
   }
   const charity = (await response.json()) as Charity;
-  console.log(charity);
+  //console.log(charity);
   return charity;
 }
 
-async function directCallSequentially(url: string) {
+async function directCallSequentially(url: string): Promise<Charity | Error> {
   const result = promiseChain.then(() => directCall(url));
   promiseChain = result.catch(() => new Error("Error: unexpected exception")); // agai n, unsure about this
   return result;
+}
+
+
+
+/**
+ * FindThatCharity
+ * @customfunction
+ * @param {string} org_id
+ * @returns {any} Results of the query.
+ */
+async function findThatCharityTest(org_id: string) {
+  const API_URL = "https://findthatcharity.uk/orgid/";
+  const url = API_URL + org_id + ".json";
+  const charity_or_error = await directCallSequentially(url);
+  const test = charity_or_error.name;
+  const entity = {
+    type: "Entity",
+    text: `findThatCharity ${test}`,
+    properties: {
+      charity_or_error: test
+    },
+  };
+  return entity;
 }
 
 // TODO: delete source url below
@@ -206,7 +230,7 @@ function charity_to_excel(org_url: string, charity: Charity): ExcelValue {
   return entity;
 }
 
-
+const cache: { [org_id: string]: ExcelValue } = {};
 
 /**
  * FindThatCharity
@@ -215,15 +239,23 @@ function charity_to_excel(org_url: string, charity: Charity): ExcelValue {
  * @returns {any} Results of the query.
  */
 async function findThatCharity(org_id: string) {
+  if (cache[org_id]) {
+    console.log(`Cache hit for ${org_id}`);
+    return cache[org_id];
+  }
   const API_URL = "https://findthatcharity.uk/orgid/";
   const org_url = API_URL + org_id;
-
-  const response = await fetch(org_url + ".json", { method: "GET" });
-  if (!response.ok) {
-    return `Error! status: ${response.status}`;
+  const charity_or_error = await directCallSequentially(org_url + ".json");
+  if (charity_or_error instanceof Error) {
+    return {
+      type: "Entity",
+      text: `${org_id} not found on FindThatCharity`,
+      properties: { error: charity_or_error.message },
+      provider: provider_findThatCharity,
+    };
   }
-  const charity = (await response.json()) as Charity;
-  console.log(charity);
+  const charity = charity_or_error as Charity;
   const result = charity_to_excel(org_url, charity);
+  cache[org_id] = result; // NB not caching errors, so will retry
   return result;
 }
