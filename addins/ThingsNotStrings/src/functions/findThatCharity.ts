@@ -231,7 +231,6 @@ function charity_to_excel(org_url: string, charity: Charity): ExcelValue {
 }
 
 const cache: { [org_id: string]: ExcelValue } = {};
-
 /**
  * FindThatCharity
  * @customfunction
