@@ -9,6 +9,7 @@
 Office.onReady(() => {
   const versionInfo = document.getElementById("version-info");
   versionInfo.textContent = `Version Timestamp: ${VERSION_TIMESTAMP}`;
+  console.log("Version Timestamp: " + VERSION_TIMESTAMP);
   //document.getElementById("sideload-msg").style.display = "none";
   //document.getElementById("app-body").style.display = "flex";
   //document.getElementById("run").onclick = run;
