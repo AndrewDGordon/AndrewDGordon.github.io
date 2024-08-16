@@ -119,8 +119,8 @@ function charity_to_excel(org_url: string, charity: Charity): ExcelValue {
     type: "Entity",
     text: charity.name,
     properties: {
-      name: charity.name,
-      organisationTypePrimary: charity.organisationTypePrimary,
+      name: mk_ExcelString(charity.name),
+      organisationTypePrimary: mk_ExcelString(charity.organisationTypePrimary),
       description: value_to_excel(charity.description),
       latestFinancialYearEnd: string_to_date(charity.latestFinancialYearEnd) as ExcelValue,
       latestIncome: charity.latestIncome == null ? nullErrorValue : number_to_amount(charity.latestIncome, "GBP"),
@@ -131,12 +131,11 @@ function charity_to_excel(org_url: string, charity: Charity): ExcelValue {
 
       telephone: value_to_excel(charity.telephone),
       email: value_to_excel(charity.email),
-      location: charity.location.map((loc) => loc.name).join(","),
-      address:
-        charity.address.streetAddress + ", " + charity.address.addressLocality + ", " + charity.address.postalCode,
+      location: mk_ExcelString(charity.location.map((loc) => loc.name).join(",")),
+      address: mk_ExcelString(charity.address.streetAddress + ", " + charity.address.addressLocality + ", " + charity.address.postalCode),
       url: value_to_excel(charity.url),
 
-      id: charity.id,
+      id: mk_ExcelString(charity.id),
       charityNumber: value_to_excel(charity.charityNumber),
       companyNumber: value_to_excel(charity.companyNumber),
       active: { type: "Boolean", basicValue: charity.active },
@@ -144,13 +143,13 @@ function charity_to_excel(org_url: string, charity: Charity): ExcelValue {
       dateRemoved: (charity.dateRemoved == null ? "not applicable" : string_to_date(charity.dateRemoved)) as ExcelValue,
 
       parent: value_to_excel(charity.parent),
-      organisationType: charity.organisationType.join(","),
-      alternateName: charity.alternateName.join(","),
+      organisationType: mk_ExcelString(charity.organisationType.join(",")),
+      alternateName: mk_ExcelString(charity.alternateName.join(",")),
 
-      sources: charity.sources.join(","),
-      links: charity.links.map((link) => link.site + ": " + link.url).join(","),
-      orgIDs: charity.orgIDs.join(","),
-      linked_records: charity.linked_records.map((rec) => rec.orgid + ": " + rec.url).join(","),
+      sources: mk_ExcelString(charity.sources.join(",")),
+      links: mk_ExcelString(charity.links.map((link) => link.site + ": " + link.url).join(",")),
+      orgIDs: mk_ExcelString(charity.orgIDs.join(",")),
+      linked_records: mk_ExcelString(charity.linked_records.map((rec) => rec.orgid + ": " + rec.url).join(",")),
       dateModified: string_to_date(charity.dateModified) as ExcelValue,
       raw_charity_data: value_to_excel(charity),
     },

@@ -7,8 +7,6 @@
 
 // How different types of Excel values to be returned to Excel
 export type ExcelValue =
-  | number
-  | string
   | ExcelEntity
   | ExcelArray
   | ExcelString

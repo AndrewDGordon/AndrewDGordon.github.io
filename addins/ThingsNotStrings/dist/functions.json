@@ -142,6 +142,19 @@
             "result": {
                 "dimensionality": "matrix"
             }
+        },
+        {
+            "description": "Accept an array of entities",
+            "id": "GETENTITIES",
+            "name": "GETENTITIES",
+            "parameters": [
+                {
+                    "dimensionality": "matrix",
+                    "name": "entities",
+                    "type": "any"
+                }
+            ],
+            "result": {}
         }
     ]
 }

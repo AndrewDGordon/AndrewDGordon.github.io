@@ -1,6 +1,15 @@
 ﻿/* global clearInterval, console, CustomFunctions, setInterval */
 
-import { Card, ExcelValue, ExcelArray, ExcelDouble, ExcelEntity, ExcelError, ExcelFormattedNumber, ExcelString } from "./types";
+import {
+  Card,
+  ExcelValue,
+  ExcelArray,
+  ExcelDouble,
+  ExcelEntity,
+  ExcelError,
+  ExcelFormattedNumber,
+  ExcelString,
+} from "./types";
 import { nullErrorValue, mk_ExcelArray, mk_ExcelString, mk_ExcelDouble } from "./types";
 import { value_to_excel, number_to_amount, string_to_date } from "./types";
 
@@ -232,16 +241,16 @@ function grant_to_excel(grant: Grant): ExcelValue {
     type: "Entity",
     text: data.title,
     properties: {
-      title: data.title,
+      title: mk_ExcelString(data.title),
       awardDate: string_to_date(data.awardDate) as ExcelValue,
-      funder: funder,
-      recipient: recipient,
+      funder: mk_ExcelString(funder),
+      recipient: mk_ExcelString(recipient),
       amountAwarded: amountAwarded,
-      description: data.description,
-      grant_id: grant.grant_id,
-      funder_id: funder_id,
-      recipient_id: recipient_id,
-      grant_nav: "https://grantnav.threesixtygiving.org/grant/" + grant.grant_id,
+      description: mk_ExcelString(data.description),
+      grant_id: mk_ExcelString(grant.grant_id),
+      funder_id: mk_ExcelString(funder_id),
+      recipient_id: mk_ExcelString(recipient_id),
+      grant_nav: mk_ExcelString("https://grantnav.threesixtygiving.org/grant/" + grant.grant_id),
       raw_grant_data: value_to_excel(grant),
     },
     layouts: {
@@ -268,6 +277,123 @@ function grant_to_excel(grant: Grant): ExcelValue {
       logoSourceAddress:
         "https://www.threesixtygiving.org/wp-content/themes/360giving2020/assets/images/360-logos/360giving-main.svg", // Source URL of the logo to display.
       logoTargetAddress: "https://grantnav.threesixtygiving.org/grant/" + grant.grant_id, // Destination URL that the logo navigates to when selected.
+    },
+  };
+  return entity;
+}
+
+type Triple = { grant_id: string; funder_id: string; recipient_id: string };
+function triples_to_excel(triples: Triple[]): ExcelValue {
+  const entity: ExcelEntity = {
+    type: "Entity",
+    text: "Who funds with who",
+    properties: {
+      triples: mk_ExcelArray(
+        triples.map((triple) => [
+          mk_ExcelString(triple.grant_id),
+          mk_ExcelString(triple.funder_id),
+          mk_ExcelString(triple.recipient_id),
+        ])
+      ),
+    },
+  };
+  return entity;
+}
+
+/**
+ * Accept an array of entities
+ * @customfunction
+ * @param {any[][]} entities
+ * @returns {any} The outcome.
+ */
+
+function getEntities(entities: any[][]): any {
+  // empty array of triples
+  const triples: Triple[] = [];
+  for (let i = 0; i < entities.length; i++) {
+    for (let j = 0; j < entities[i].length; j++) {
+      //console.log(`row ${i} column ${j}`);
+      const entity = entities[i][j] as ExcelValue;
+      if (entity.type == "Entity") {
+        const grants = entity.properties.grants;
+        if (grants.type == "Array") {
+          const rows = grants.elements.length;
+          //console.log(`${rows} grants`);
+          for (let r = 0; r < rows; r++) {
+            const grant = grants.elements[r][0] as ExcelEntity;
+            const title = grant.properties.title as ExcelString;
+            const funder = grant.properties.funder as ExcelString;
+            const funder_id = grant.properties.funder_id as ExcelString;
+            const recipient = grant.properties.recipient as ExcelString;
+            const recipient_id = grant.properties.recipient_id as ExcelString;
+            const grant_id = grant.properties.grant_id as ExcelString;
+            //console.log(`grant ${grant_id.basicValue} from ${funder.basicValue} to ${recipient.basicValue}`);
+            triples.push({
+              grant_id: grant_id.basicValue,
+              funder_id: funder_id.basicValue,
+              recipient_id: recipient_id.basicValue,
+            });
+          }
+        } else if (grants.type == "Error") {
+          //console.log("0 grants");
+        }
+      }
+    }
+  }
+
+  // make an array of all the unique funders
+  const funder_ids = Array.from(new Set(triples.map((triple) => triple.funder_id)));
+
+  // make an array of all the unique recipients
+  const recipient_ids = Array.from(new Set(triples.map((triple) => triple.recipient_id)));
+
+  // for each recipient r, funders_of_recipient[r] is the array of its funders
+  const funders_of_recipient: { [key: string]: string[] } = {};
+   for (let i = 0; i < recipient_ids.length; i++)
+    funders_of_recipient[recipient_ids[i]] = [];
+  // record the funders for each recipient
+  for (let i = 0; i < triples.length; i++) {
+    const triple = triples[i];
+    funders_of_recipient[triple.recipient_id].push(triple.funder_id);
+  }
+ 
+  // dump to the console
+  for (const [key, value] of Object.entries(funders_of_recipient)) {
+    console.log(`${key} ${value}`);
+  }
+
+  const count: { [pair_funders: string]: number } = {};
+  // for each recipients, enumerate the pairs of funders, and count them
+  for (let i = 0; i < recipient_ids.length; i++) {
+    const recipient = recipient_ids[i];
+    const funders = funders_of_recipient[recipient];
+    for (let i = 0; i < funders.length; i++) {
+      for (let j = 0; j < funders.length; j++) {
+        if (i !== j) {
+          const key = funders[i] + ";" + funders[j];
+          count[key] = (count[key] || 0) + 1;
+        }
+      }
+    }
+  }
+
+  // dump the count to the console
+  for (const [key, value] of Object.entries(count)) {
+    console.log(`${key} ${value}`);
+  }
+  
+  // enumerate the dictionary
+  const outcome: [ExcelString, ExcelString, ExcelDouble][] = [];
+  for (const [key, value] of Object.entries(count)) {
+    const arr: string[] = key.split(";");
+    outcome.push([mk_ExcelString(arr[0]), mk_ExcelString(arr[1]), mk_ExcelDouble(value)]);
+  }
+
+  const entity = {
+    type: "Entity",
+    text: `Who funds with who`,
+    properties: {
+      who_funds_with_who: mk_ExcelArray(outcome),
     },
   };
   return entity;
