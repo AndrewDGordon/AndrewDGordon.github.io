@@ -381,6 +381,9 @@ function getEntities(entities: any[][]): any {
   for (const [key, value] of Object.entries(count)) {
     console.log(`${key} ${value}`);
   }
+
+  // sort the count
+  const sorted = Object.entries(count).sort((a, b) => b[1] - a[1]);
   
   // enumerate the dictionary
   const outcome: [ExcelString, ExcelString, ExcelDouble][] = [];
@@ -388,13 +391,5 @@ function getEntities(entities: any[][]): any {
     const arr: string[] = key.split(";");
     outcome.push([mk_ExcelString(arr[0]), mk_ExcelString(arr[1]), mk_ExcelDouble(value)]);
   }
-
-  const entity = {
-    type: "Entity",
-    text: `Who funds with who`,
-    properties: {
-      who_funds_with_who: mk_ExcelArray(outcome),
-    },
-  };
-  return entity;
+  return mk_ExcelArray(outcome);
 }
