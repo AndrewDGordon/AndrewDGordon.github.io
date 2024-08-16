@@ -184,13 +184,8 @@ async function grants_made(org_id: string) {
   };
 }
 
-/**
- * Who funds with who
- * @customfunction
- * @param {string[][]} grants_column - 1D array of grant entities
- * @returns {any[][]} Results of the query.
- */
-async function who_funds_with_who(grants_column: string[][]) {
+// TODO cut this code
+async function who_funds_with_who_obsolete(grants_column: string[][]) {
   const result: [ExcelString, ExcelString][] = [];
   const N = grants_column.length;
   for (let r = 0; r < N; r++) {
@@ -301,41 +296,51 @@ function triples_to_excel(triples: Triple[]): ExcelValue {
 }
 
 /**
- * Accept an array of entities
+ * Who funds with who
  * @customfunction
- * @param {any[][]} entities
- * @returns {any} The outcome.
+ * @param {any[][]} array of grant sets returned by grants_received
+ * @returns {any[][]} The outcome.
  */
 
-function getEntities(entities: any[][]): any {
+function who_funds_with_who(entities: any[][]): any[][] {
+  // empty cache from org_id to name of the organization
+  const org_id_to_name: { [key: string]: string } = {};
   // empty array of triples
   const triples: Triple[] = [];
   for (let i = 0; i < entities.length; i++) {
     for (let j = 0; j < entities[i].length; j++) {
       //console.log(`row ${i} column ${j}`);
       const entity = entities[i][j] as ExcelValue;
-      if (entity.type == "Entity") {
-        const grants = entity.properties.grants;
-        if (grants.type == "Array") {
-          const rows = grants.elements.length;
-          //console.log(`${rows} grants`);
-          for (let r = 0; r < rows; r++) {
-            const grant = grants.elements[r][0] as ExcelEntity;
-            const title = grant.properties.title as ExcelString;
-            const funder = grant.properties.funder as ExcelString;
-            const funder_id = grant.properties.funder_id as ExcelString;
-            const recipient = grant.properties.recipient as ExcelString;
-            const recipient_id = grant.properties.recipient_id as ExcelString;
-            const grant_id = grant.properties.grant_id as ExcelString;
-            //console.log(`grant ${grant_id.basicValue} from ${funder.basicValue} to ${recipient.basicValue}`);
-            triples.push({
-              grant_id: grant_id.basicValue,
-              funder_id: funder_id.basicValue,
-              recipient_id: recipient_id.basicValue,
-            });
+      if (typeof entity === "object" && entity !== null && "type" in entity) {
+        if (entity.type == "Entity") {
+          const grants = entity.properties.grants;
+          if (grants.type == "Array") {
+            const rows = grants.elements.length;
+            //console.log(`${rows} grants`);
+            for (let r = 0; r < rows; r++) {
+              const grant = grants.elements[r][0] as ExcelEntity;
+              const title = grant.properties.title as ExcelString;
+              const funder = grant.properties.funder as ExcelString;
+              const funder_id = grant.properties.funder_id as ExcelString;
+
+              const recipient = grant.properties.recipient as ExcelString;
+              const recipient_id = grant.properties.recipient_id as ExcelString;
+              const grant_id = grant.properties.grant_id as ExcelString;
+              
+              // cache the names of the funder and recipient (we only remember last name for each org_id)
+              org_id_to_name[funder_id.basicValue] = funder.basicValue;
+              org_id_to_name[recipient_id.basicValue] = recipient.basicValue;
+
+              //console.log(`grant ${grant_id.basicValue} from ${funder.basicValue} to ${recipient.basicValue}`);
+              triples.push({
+                grant_id: grant_id.basicValue,
+                funder_id: funder_id.basicValue,
+                recipient_id: recipient_id.basicValue,
+              });
+            }
+          } else if (grants.type == "Error") {
+            //console.log("0 grants");
           }
-        } else if (grants.type == "Error") {
-          //console.log("0 grants");
         }
       }
     }
@@ -347,56 +352,45 @@ function getEntities(entities: any[][]): any {
   // make an array of all the unique recipients
   const recipient_ids = Array.from(new Set(triples.map((triple) => triple.recipient_id)));
 
-  // for each recipient r, funders_of_recipient[r] is the array of its funders
-  const funders_of_recipient: { [key: string]: string[] } = {};
-  for (let i = 0; i < recipient_ids.length; i++) funders_of_recipient[recipient_ids[i]] = [];
+  // for each recipient r, funders_of_recipient[r] is the set of its funders
+  const funders_of_recipient: { [key: string]: Set<string> } = {};
+  for (let i = 0; i < recipient_ids.length; i++) funders_of_recipient[recipient_ids[i]] = new Set<string>();
   // record the funders for each recipient
   for (let i = 0; i < triples.length; i++) {
     const triple = triples[i];
-    funders_of_recipient[triple.recipient_id].push(triple.funder_id);
-  }
-
-  // dump to the console
-  for (const [key, value] of Object.entries(funders_of_recipient)) {
-    console.log(`${key} ${value}`);
+    funders_of_recipient[triple.recipient_id].add(triple.funder_id);
   }
 
   const count: { [pair_funders: string]: number } = {};
   // for each recipients, enumerate the pairs of funders, and count them
-  for (let i = 0; i < recipient_ids.length; i++) {
-    const recipient = recipient_ids[i];
+  for (let r = 0; r < recipient_ids.length; r++) {
+    const recipient = recipient_ids[r];
     const funders = funders_of_recipient[recipient];
-    for (let i = 0; i < funders.length; i++) {
-      for (let j = 0; j < funders.length; j++) {
+    // calculate all permutations in funder pairs
+    const funder_array = Array.from(funders);
+    for (let i = 0; i < funder_array.length; i++) {
+      for (let j = 0; j < funder_array.length; j++) {
         if (i !== j) {
-          const key = funders[i] + ";" + funders[j];
+          const key = funder_array[i] + ";" + funder_array[j];
           count[key] = (count[key] || 0) + 1;
         }
       }
     }
   }
 
-  // sort the count
-  Object.entries(count).sort((a, b) => b[1] - a[1]);
-
-  // dump the count to the console
-  for (const [key, value] of Object.entries(count)) {
-    console.log(`${key} ${value}`);
-  }
-
   // enumerate the dictionary
   const outcome: [ExcelString, ExcelString, ExcelDouble][] = [];
   for (const [key, value] of Object.entries(count)) {
     const arr: string[] = key.split(";");
-    outcome.push([mk_ExcelString(arr[0]), mk_ExcelString(arr[1]), mk_ExcelDouble(value)]);
+    outcome.push([
+      { type: "String", basicValue: org_id_to_name[arr[0]] },
+      { type: "String", basicValue: org_id_to_name[arr[1]] },
+      { type: "Double", basicValue: value },
+    ]);
   }
 
-  const entity: ExcelEntity = {
-    type: "Entity",
-    text: "Who funds with who",
-    properties: {
-      triples: mk_ExcelArray(outcome),
-    },
-  };
-  return entity;
+  // sort the outcome by the count
+  outcome.sort((a, b) => b[2].basicValue - a[2].basicValue);
+
+  return outcome;
 }

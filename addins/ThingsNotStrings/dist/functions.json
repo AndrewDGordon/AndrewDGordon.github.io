@@ -133,28 +133,14 @@
             "name": "WHO_FUNDS_WITH_WHO",
             "parameters": [
                 {
-                    "description": "1D array of grant entities",
-                    "dimensionality": "matrix",
-                    "name": "grants_column",
-                    "type": "string"
-                }
-            ],
-            "result": {
-                "dimensionality": "matrix"
-            }
-        },
-        {
-            "description": "Accept an array of entities",
-            "id": "GETENTITIES",
-            "name": "GETENTITIES",
-            "parameters": [
-                {
                     "dimensionality": "matrix",
                     "name": "entities",
                     "type": "any"
                 }
             ],
-            "result": {}
+            "result": {
+                "dimensionality": "matrix"
+            }
         }
     ]
 }
