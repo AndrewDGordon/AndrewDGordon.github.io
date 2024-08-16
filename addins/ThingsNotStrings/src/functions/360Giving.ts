@@ -349,14 +349,13 @@ function getEntities(entities: any[][]): any {
 
   // for each recipient r, funders_of_recipient[r] is the array of its funders
   const funders_of_recipient: { [key: string]: string[] } = {};
-   for (let i = 0; i < recipient_ids.length; i++)
-    funders_of_recipient[recipient_ids[i]] = [];
+  for (let i = 0; i < recipient_ids.length; i++) funders_of_recipient[recipient_ids[i]] = [];
   // record the funders for each recipient
   for (let i = 0; i < triples.length; i++) {
     const triple = triples[i];
     funders_of_recipient[triple.recipient_id].push(triple.funder_id);
   }
- 
+
   // dump to the console
   for (const [key, value] of Object.entries(funders_of_recipient)) {
     console.log(`${key} ${value}`);
@@ -377,19 +376,19 @@ function getEntities(entities: any[][]): any {
     }
   }
 
+  // sort the count
+  Object.entries(count).sort((a, b) => b[1] - a[1]);
+
   // dump the count to the console
   for (const [key, value] of Object.entries(count)) {
     console.log(`${key} ${value}`);
   }
 
-  // sort the count
-  const sorted = Object.entries(count).sort((a, b) => b[1] - a[1]);
-  
   // enumerate the dictionary
   const outcome: [ExcelString, ExcelString, ExcelDouble][] = [];
   for (const [key, value] of Object.entries(count)) {
     const arr: string[] = key.split(";");
     outcome.push([mk_ExcelString(arr[0]), mk_ExcelString(arr[1]), mk_ExcelDouble(value)]);
   }
-  return mk_ExcelArray(outcome);
+  return outcome;
 }
