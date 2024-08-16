@@ -390,5 +390,13 @@ function getEntities(entities: any[][]): any {
     const arr: string[] = key.split(";");
     outcome.push([mk_ExcelString(arr[0]), mk_ExcelString(arr[1]), mk_ExcelDouble(value)]);
   }
-  return outcome;
+
+  const entity: ExcelEntity = {
+    type: "Entity",
+    text: "Who funds with who",
+    properties: {
+      triples: mk_ExcelArray(outcome),
+    },
+  };
+  return entity;
 }
