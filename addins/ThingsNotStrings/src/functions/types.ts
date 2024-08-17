@@ -21,7 +21,7 @@ export type ExcelEntity = {
   type: "Entity";
   text: string;
   basicType: "Error";
-  basicValue: string;
+  basicValue: "#VALUE!";
   properties: { [key: string]: ExcelValue };
   provider?: { description: string; logoSourceAddress: string; logoTargetAddress: string };
   layouts?: {
@@ -161,7 +161,7 @@ export function value_to_excel(value: any): ExcelValue {
       return {
         type: "Entity",
         basicType: "Error",
-        basicValue: "Entity "+keys,
+        basicValue: "#VALUE!",
         text: keys,
         properties: outcome,
       };
@@ -184,7 +184,7 @@ function value_to_non_array_excel(value: any): ExcelValue {
         return {
           type: "Entity",
           basicType: "Error",
-          basicValue: "Entity - Nested array",
+          basicValue: "#VALUE!",
           text: "Nested array",
           properties: { array: excel },
         };

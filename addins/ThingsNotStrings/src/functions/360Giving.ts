@@ -237,7 +237,7 @@ function grant_to_excel(grant: Grant): ExcelValue {
   const entity: ExcelEntity = {
     type: "Entity",
     basicType: "Error",
-    basicValue: "Entity"+data.title,
+    basicValue: "#VALUE!",
     text: data.title,
     properties: {
       title: mk_ExcelString(data.title),
@@ -287,7 +287,7 @@ function triples_to_excel(triples: Triple[]): ExcelValue {
     type: "Entity",
     text: "Who funds with who",
     basicType: "Error",
-    basicValue: "Entity - Who funds with who",
+    basicValue: "#VALUE!",
     properties: {
       triples: mk_ExcelArray(
         triples.map((triple) => [
