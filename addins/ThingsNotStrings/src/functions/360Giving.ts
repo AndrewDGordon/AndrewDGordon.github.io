@@ -341,8 +341,11 @@ function AllGrants(entities: any[][]): any[][] {
         }
       }
     }
+    if (all_grants.length === 0) {
+      return [[{ type: "String", basicValue: "No grants found" }]];
+    }
     const result : ExcelValue[][] = all_grants.map((grant) => [JSON.stringify(grant)]);
-    return [[ result[0][0] ]];
+    return result;
   } catch (error) {
     return [[{ type: "String", basicValue: `Error! ${error.message}` }]];
   }

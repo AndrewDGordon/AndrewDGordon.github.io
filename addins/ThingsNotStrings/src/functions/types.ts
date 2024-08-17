@@ -20,8 +20,8 @@ export type ExcelValue =
 export type ExcelEntity = {
   type: "Entity";
   text: string;
-  basicType: "Error";
-  basicValue: "#VALUE!";
+  basicType: "Error"; // probably should be optional, as the value is forced to this anyway
+  basicValue: "#VALUE!"; // ditto.
   properties: { [key: string]: ExcelValue };
   provider?: { description: string; logoSourceAddress: string; logoTargetAddress: string };
   layouts?: {
