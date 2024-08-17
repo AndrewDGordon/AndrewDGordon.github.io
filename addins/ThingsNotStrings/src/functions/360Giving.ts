@@ -250,7 +250,7 @@ function grant_to_excel(grant: Grant): ExcelValue {
       funder_id: mk_ExcelString(funder_id),
       recipient_id: mk_ExcelString(recipient_id),
       grant_nav: mk_ExcelString("https://grantnav.threesixtygiving.org/grant/" + grant.grant_id),
-      //raw_grant_data: value_to_excel(grant),
+      raw_grant_data: value_to_excel(grant),
     },
     layouts: {
       compact: { icon: "Gift" },
@@ -264,7 +264,7 @@ function grant_to_excel(grant: Grant): ExcelValue {
           {
             layout: "List",
             title: "More",
-            properties: ["grant_id", "funder_id", "recipient_id", "grant_nav", ], // "raw_grant_data"
+            properties: ["grant_id", "funder_id", "recipient_id", "grant_nav", "raw_grant_data"], // 
             collapsible: true,
             collapsed: true,
           },

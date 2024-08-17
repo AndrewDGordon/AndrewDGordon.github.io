@@ -57,9 +57,11 @@ export function mk_ExcelDouble(value: number): ExcelDouble {
   return { type: "Double", basicValue: value };
 }
 
+export const proxy_empty_array: ExcelValue = mk_ExcelString("<Empty array>");
+
 export function mk_ExcelArray(elements: Array<Array<ExcelValue>>): ExcelValue {
   if (elements.length == 0) {
-    return nullErrorValue;
+    return proxy_empty_array;
   }
   return { type: "Array", elements: elements };
 }
@@ -108,7 +110,7 @@ export type Card = {
 
 export function value_to_excel(value: any): ExcelValue {
   // recall that typeof null == "object"
-  if (value == null) return nullErrorValue;
+  if (value == null) return proxy_empty_array;
   switch (typeof value) {
     case "boolean":
       return {
@@ -131,7 +133,7 @@ export function value_to_excel(value: any): ExcelValue {
     case "object":
       if (value.constructor === Array) {
         const length = value.length;
-        if (length == 0) return nullErrorValue; // Excel has no empty arrays
+        if (length == 0) return proxy_empty_array; // Excel has no empty arrays
 
         var rows = new Array(length);
         for (var i = 0; i < length; i++) rows[i] = [value_to_non_array_excel(value[i])];
@@ -176,7 +178,7 @@ export function value_to_excel(value: any): ExcelValue {
 
 // Excel does not support an array nested inside another, so wrap in an entity
 function value_to_non_array_excel(value: any): ExcelValue {
-  if (value == null) return nullErrorValue;
+  if (value == null) return proxy_empty_array;
   const excel = value_to_excel(value);
   switch (typeof value) {
     case "object":
