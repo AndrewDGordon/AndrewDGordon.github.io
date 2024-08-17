@@ -117,6 +117,8 @@ const provider_findThatCharity = {
 function charity_to_excel(org_url: string, charity: Charity): ExcelValue {
   const entity: ExcelEntity = {
     type: "Entity",
+    basicType: "Error",
+    basicValue: "Charity "+charity.name,
     text: charity.name,
     properties: {
       name: mk_ExcelString(charity.name),

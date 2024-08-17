@@ -7,6 +7,8 @@
 
 // How different types of Excel values to be returned to Excel
 export type ExcelValue =
+  | number
+  | string
   | ExcelEntity
   | ExcelArray
   | ExcelString
@@ -18,6 +20,8 @@ export type ExcelValue =
 export type ExcelEntity = {
   type: "Entity";
   text: string;
+  basicType: "Error";
+  basicValue: string;
   properties: { [key: string]: ExcelValue };
   provider?: { description: string; logoSourceAddress: string; logoTargetAddress: string };
   layouts?: {
@@ -49,7 +53,6 @@ export const nullErrorValue: ExcelError = {
 export function mk_ExcelString(value: string): ExcelString {
   return { type: "String", basicValue: value };
 }
-
 export function mk_ExcelDouble(value: number): ExcelDouble {
   return { type: "Double", basicValue: value };
 }
@@ -157,6 +160,8 @@ export function value_to_excel(value: any): ExcelValue {
 
       return {
         type: "Entity",
+        basicType: "Error",
+        basicValue: "Entity "+keys,
         text: keys,
         properties: outcome,
       };
@@ -178,6 +183,8 @@ function value_to_non_array_excel(value: any): ExcelValue {
       if (value.constructor === Array) {
         return {
           type: "Entity",
+          basicType: "Error",
+          basicValue: "Entity - Nested array",
           text: "Nested array",
           properties: { array: excel },
         };

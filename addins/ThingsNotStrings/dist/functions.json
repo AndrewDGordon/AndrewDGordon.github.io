@@ -128,6 +128,21 @@
             "result": {}
         },
         {
+            "description": "AllGrants",
+            "id": "ALLGRANTS",
+            "name": "ALLGRANTS",
+            "parameters": [
+                {
+                    "dimensionality": "matrix",
+                    "name": "entities",
+                    "type": "any"
+                }
+            ],
+            "result": {
+                "dimensionality": "matrix"
+            }
+        },
+        {
             "description": "Who funds with who",
             "id": "WHO_FUNDS_WITH_WHO",
             "name": "WHO_FUNDS_WITH_WHO",
