@@ -32,3 +32,10 @@ Commit the changed files into GitHub
 * TODO: what's a command to do this?
 
 Wait a little, and dist is available on the web.
+
+## How to generate the TypeScript interface for the 360Giving Data Standard
+* fetch the [schema](https://github.com/ThreeSixtyGiving/standard/tree/main/schema)
+* npm install -g json-schema-to-typescript
+* hand edit to change line 3 from "360Giving Data Standard Schema" to "The 360Giving Data Standard Schema"
+  (because the schema becomes a TypeScript type based on this name, and it has to start with a letter.)
+* json2ts 360-giving-schema.json -o 360-giving-schema.ts
