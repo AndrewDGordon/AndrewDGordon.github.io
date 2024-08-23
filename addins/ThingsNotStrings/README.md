@@ -6,6 +6,10 @@ Motivating examples include:
 * Charities from [FindThatCharity](https://findthatcharity.uk)
 * Grants from one organization to another from [360Giving](https://360Giving.org)
 
+This development version is for use with Windows desktop Excel. Not yet tested for Mac Excel or Excel for the web.
+
+There is a test spreadsheet [available here](https://1drv.ms/x/s!AvVrI50BmxTGsIpeixwdG8EhycvQUQ?e=4LdMLF).
+
 ## How to install on Windows for use with desktop Excel
 
 You need to follow the steps below. The page [Sideload Office Add-ins for testing from a network share](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins) explains the steps in detail.
