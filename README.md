@@ -3,7 +3,7 @@
 Andy Gordon is a computer scientist specializing in programming languages, AI, and human-computer interaction.
 Andy is Chief Science Officer at London startup [Cogna](https://cogna.co)
 where he leads research on [delivering software from natural language](https://icfp24.sigplan.org/details/icfp-2024-papers/36/Requirements-are-All-You-Need).
-Previously, Andy had a 26 year career at Microsoft.
+Before joining Cogna as an early employee in 2023, Andy had a 26 year career at Microsoft.
 As Partner Research Manager at Microsoft Research, Andy led a diverse team of researchers and engineers to evolve Microsoft Excel as an end-user programming language.
 He made significant contributions to the development of
 [natural language formulas using generative AI](https://dl.acm.org/doi/abs/10.1145/3544548.3580817) in [Copilot for Excel](https://support.microsoft.com/en-us/copilot-excel),
