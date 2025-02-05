@@ -9,7 +9,7 @@ He made significant contributions to the development of
 [natural language formulas using generative AI](https://dl.acm.org/doi/abs/10.1145/3544548.3580817) in [Copilot for Excel](https://support.microsoft.com/en-us/copilot-excel),
 formula features like [LET/LAMBDA](https://www.linkedin.com/feed/update/urn:li:activity:6759611720181907456/),
 the [Calc.ts client-side execution engine for Excel formulas](https://www.linkedin.com/feed/update/urn:li:activity:6688489472960544768/),
-and [Excel Labs](https://www.microsoft.com/en-us/garage/profiles/excel-labs/),
+and [Excel Labs](https://www.microsoft.com/en-us/garage/profiles/excel-labs/).
 Andy was recognised as a [2020 Fellow of the Association for Computing Machinery](https://awards.acm.org/award_winners/gordon_N026872) (ACM) for his research on programming languages:
 their principles, logic, usability, and trustworthiness.
 Andy is now Honorary Professor at the University of Edinburgh, following 12 years as full Professor.
