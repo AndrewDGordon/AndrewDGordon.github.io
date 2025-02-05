@@ -1,6 +1,6 @@
 # Andrew D. Gordon
 
-Andy Gordon is a computer scientist specializing in programming languages, AI, and human-computer interaction.
+[Andy Gordon](https://www.linkedin.com/in/andrew-d-gordon/) is a computer scientist specializing in programming languages, AI, and human-computer interaction.
 Andy is Science Advisor at London startup [Cogna](https://cogna.co)
 where he leads research on [delivering software from natural language](https://icfp24.sigplan.org/details/icfp-2024-papers/36/Requirements-are-All-You-Need).
 Before joining Cogna as an early employee in 2023, Andy had a 26 year career at Microsoft Research.
