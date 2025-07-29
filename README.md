@@ -23,5 +23,6 @@ His PhD research at Cambridge contributed to the design of monadic I/O in Haskel
 * [Researchr](https://conf.researchr.org/profile/conf/andrewdgordon)
 * [Wikidata Q4756743](https://www.wikidata.org/wiki/Q4756743)
 * [arXiv](https://arxiv.org/a/gordon_a_1)
+* [YouTube](https://youtube.com/playlist?list=PLMP25y9eI54pt_Z525BdRftALa_c6Xc-L&si=iGyioT_hIuNAriTe)
 * [OpenAlex](https://openalex.org/authors/a5078684560) (work in progress!)
 * [X](https://x.com/AndrewDGordon)
