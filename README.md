@@ -15,7 +15,8 @@ their principles, logic, usability, and trustworthiness.
 Andy is now Honorary Professor at the University of Edinburgh, following 12 years as full Professor.
 His PhD research at Cambridge contributed to the design of monadic I/O in Haskell, with his [ASCII art ">>="](https://twitter.com/AndrewDGordon/status/1559448300134211584) inspiring the Haskell logo.
 
-* My [formal CV](cv.pdf)
+* My [short formal CV](short-cv.pdf) with summary of career achievments.
+* My [long formal CV](cv.pdf) with full list of publications and professional service. 
 * [LinkedIn](https://www.linkedin.com/in/andrew-d-gordon/)
 * [Google Scholar](https://scholar.google.com/citations?user=mfBjUiIAAAAJ)
 * [DBLP](https://dblp.org/pid/g/AndrewDGordon.html)
