@@ -1,8 +1,9 @@
 # Andrew D. Gordon
 
-[Andy Gordon](https://www.linkedin.com/in/andrew-d-gordon/) is a computer scientist specializing in programming languages, AI, and human-computer interaction.
+[Andrew D. Gordon](https://www.linkedin.com/in/andrew-d-gordon/) is a computer scientist specializing in programming languages, AI, and human-computer interaction.
 Andy is Science Advisor at London startup [Cogna](https://cogna.co)
-where he leads research on [delivering software from natural language](https://icfp24.sigplan.org/details/icfp-2024-papers/36/Requirements-are-All-You-Need).
+where he leads research on [delivering software from natural language](https://icfp24.sigplan.org/details/icfp-2024-papers/36/Requirements-are-All-You-Need),
+and is Science Advisor at the [Advanced Research + Invention Agency (ARIA)](https://www.aria.org.uk/).
 Before joining Cogna as an early employee in 2023, Andy had a 26 year career at Microsoft Research.
 As Partner Research Manager, Andy led a diverse team of researchers and engineers to evolve Excel as an end-user programming language.
 He made significant contributions to the development of
@@ -27,3 +28,4 @@ His PhD research at Cambridge contributed to the design of monadic I/O in Haskel
 * [YouTube](https://youtube.com/playlist?list=PLMP25y9eI54pt_Z525BdRftALa_c6Xc-L&si=iGyioT_hIuNAriTe)
 * [OpenAlex](https://openalex.org/authors/a5078684560) (work in progress!)
 * [X](https://x.com/AndrewDGordon)
+
