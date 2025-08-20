@@ -15,6 +15,7 @@ Andy was recognised as a [2020 Fellow of the Association for Computing Machinery
 their principles, logic, usability, and trustworthiness.
 Andy is now Honorary Professor at the University of Edinburgh, following 12 years as full Professor.
 His PhD research at Cambridge contributed to the design of monadic I/O in Haskell, with his [ASCII art ">>="](https://twitter.com/AndrewDGordon/status/1559448300134211584) inspiring the Haskell logo.
+During his postdoc at Chalmers University he pioneered use of the [locally nameless representation](https://www.chargueraud.org/research/2009/ln/main.pdf) in formal proofs.
 
 * My [short formal CV](short-cv.pdf) with summary of career achievements.
 * My [long formal CV](cv.pdf) with full list of publications and professional service. 
@@ -28,4 +29,5 @@ His PhD research at Cambridge contributed to the design of monadic I/O in Haskel
 * [YouTube](https://youtube.com/playlist?list=PLMP25y9eI54pt_Z525BdRftALa_c6Xc-L&si=iGyioT_hIuNAriTe)
 * [OpenAlex](https://openalex.org/authors/a5078684560) (work in progress!)
 * [X](https://x.com/AndrewDGordon)
+
 
