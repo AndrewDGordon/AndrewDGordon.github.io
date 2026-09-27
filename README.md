@@ -1,6 +1,7 @@
 # Andrew D. Gordon
 
 [Andrew D. Gordon](https://www.linkedin.com/in/andrew-d-gordon/) is a computer scientist specializing in formal methods, AI, and programming languages.
+
 As Science Advisor at the [Advanced Research + Invention Agency (ARIA)](https://www.aria.org.uk/), Andy advises the
 [Safeguarded AI](https://aria.org.uk/opportunity-spaces/trust-everything-everywhere/safeguarded-ai) programme on cybersecurity, AI, and formal methods.
 As Science Advisor at [Cogna](https://cogna.co), Andy leads research on [delivering software from natural language](https://icfp24.sigplan.org/details/icfp-2024-papers/36/Requirements-are-All-You-Need),
