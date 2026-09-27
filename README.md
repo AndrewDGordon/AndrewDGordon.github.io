@@ -1,9 +1,10 @@
 # Andrew D. Gordon
 
-[Andrew D. Gordon](https://www.linkedin.com/in/andrew-d-gordon/) is a computer scientist specializing in programming languages, AI, and human-computer interaction.
-Andy is Science Advisor at London startup [Cogna](https://cogna.co)
-where he leads research on [delivering software from natural language](https://icfp24.sigplan.org/details/icfp-2024-papers/36/Requirements-are-All-You-Need),
-and is Science Advisor at the [Advanced Research + Invention Agency (ARIA)](https://www.aria.org.uk/).
+[Andrew D. Gordon](https://www.linkedin.com/in/andrew-d-gordon/) is a computer scientist specializing in formal methods, AI, and programming languages.
+As Science Advisor at the [Advanced Research + Invention Agency (ARIA)](https://www.aria.org.uk/), Andy advises the
+[Safeguarded AI](https://aria.org.uk/opportunity-spaces/trust-everything-everywhere/safeguarded-ai) programme on cybersecurity, AI, and formal methods.
+As Science Advisor at [Cogna](https://cogna.co), Andy leads research on [delivering software from natural language](https://icfp24.sigplan.org/details/icfp-2024-papers/36/Requirements-are-All-You-Need),
+including [DSL design](https://www.youtube.com/watch?v=13y3Kbizxgo), finding [ambiguities in specifications](https://cogna.co/blog/building-a-precision-compiler-in-the-face-of-ambiguous-source-code-and-ill-defined-semantics/), and testing and verification of AI-generated applications with various formal methods.
 Before joining Cogna as an early employee in 2023, Andy had a 26 year career at Microsoft Research.
 As Partner Research Manager, Andy led a diverse team of researchers and engineers to evolve Excel as an end-user programming language.
 He made significant contributions to the development of
